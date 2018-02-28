@@ -27,7 +27,7 @@ class TeX(object):
         else:
             self.temp_folder = temp_folder
         # cwd = os.path.abspath(os.path.dirname(md_full_path))
-        self.cwd = os.path.abspath(os.path.dirname(md_full_path))
+        self.cwd = os.path.dirname(os.path.abspath(os.path.expanduser(md_full_path)))
         root = os.path.splitext(os.path.basename(md_full_path))[0]
         self.fname_md = root + '.txt'
         self.fname_tex = root + '.tex'
@@ -40,12 +40,11 @@ class TeX(object):
         sed_full_path = os.path.join(self.temp_folder, self.fname_sed)
         if sed_file is not None:
             f = open(sed_full_path, 'w')
-            run(['sed', '-f', sed_file, self.fname_tex], stdout=f)
+            run(['sed', '-f', sed_file, tex_full_path], stdout=f)
             f.close()
             shutil.copyfile(sed_full_path, os.path.join(self.cwd, self.fname_pdf))
         else:
             self.fname_sed = self.fname_tex
-
 
     def compile_md(self):
         md_full_path = os.path.join(self.cwd, self.fname_md)
@@ -79,6 +78,7 @@ def test_code():
     )
     tex_file.prep_temp_directory()
     tex_file.compile_md()
+    tex_file.apply_sed()
     tex_file.compile_xetex()
 
 
