@@ -29,22 +29,35 @@ class TeX(object):
         # cwd = os.path.abspath(os.path.dirname(md_full_path))
         self.cwd = os.path.abspath(os.path.dirname(md_full_path))
         root = os.path.splitext(os.path.basename(md_full_path))[0]
-        self.md_fname = root + '.txt'
-        self.tex_fname = root + '.tex'
-        self.pdf_fname = root + '.pdf'
+        self.fname_md = root + '.txt'
+        self.fname_tex = root + '.tex'
+        self.fname_sed = root + '.sed'
+        self.fname_pdf = root + '.pdf'
         self.compile_total = compile_total
 
+    def apply_sed(self, sed_file=None):
+        tex_full_path = os.path.join(self.temp_folder, self.fname_tex)
+        sed_full_path = os.path.join(self.temp_folder, self.fname_sed)
+        if sed_file is not None:
+            f = open(sed_full_path, 'w')
+            run(['sed', '-f', sed_file, self.fname_tex], stdout=f)
+            f.close()
+            shutil.copyfile(sed_full_path, os.path.join(self.cwd, self.fname_pdf))
+        else:
+            self.fname_sed = self.fname_tex
+
+
     def compile_md(self):
-        md_full_path = os.path.join(self.cwd, self.md_fname)
-        tex_full_path = os.path.join(self.temp_folder, self.tex_fname)
+        md_full_path = os.path.join(self.cwd, self.fname_md)
+        tex_full_path = os.path.join(self.temp_folder, self.fname_tex)
         subprocess.run(['multimarkdown', '-t', 'latex',
                         '-o', tex_full_path, md_full_path])
         shutil.copy(tex_full_path, self.cwd)
 
     def compile_xetex(self):
         os.chdir(self.temp_folder)
-        tex_full_path = os.path.join(self.temp_folder, self.tex_fname)
-        pdf_full_path = os.path.join(self.temp_folder, self.pdf_fname)
+        tex_full_path = os.path.join(self.temp_folder, self.fname_sed)
+        pdf_full_path = os.path.join(self.temp_folder, self.fname_pdf)
         for i in range(self.compile_total):
             subprocess.run(
                 ['xelatex', '-interaction=batchmode', tex_full_path])
