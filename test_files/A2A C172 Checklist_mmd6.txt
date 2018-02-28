@@ -1,0 +1,181 @@
+latex config:		checklist
+Title:				A2A C172
+Author:                          
+Date:				13 February 2018
+Base Header Level:	2  
+latex mode:			memoir  
+
+# Software Setup
+- Simstarter NG Profile : Delta VATSIM
+
+# Cabin
+- Pilot Tube Cover : REMOVE
+- Pilot's Operating Handbook : AVAILABLE
+- Airplane Weight and Balance : CHECKED
+- Parking Brake : SET
+- Control Wheel Lock : REMOVE
+- Ignition Switch : OFF
+- Avionics Master Switch : OFF
+- Master Switch : ON
+- Fuel Quantity Indicators : CHECK
+- Avionics Master Switch : OFF
+- Static Pressure Alternative Source Valve : OFF
+- Annunciator Panel Switch: TEST
+- Fuel Selector Valve : BOTH
+- Fuel Shutoff Valve : ON
+- Flaps : EXTEND
+- Pitot Heat : ON
+- Pitot Heat : OFF
+- Master Switch : OFF
+- Elevator Trim : SET FOR TAKEOFF
+- Baggage Door : CHECK
+- Aitopilot Static Source Opening : CHECK
+
+# Before Starting Engine
+- Preflight Inspection : COMPLETE
+- Passenger Briefing : COMPLETE
+- Seats and Seat Belts : ADJUST and LOCK
+- Brakes : TEST and SET
+- Circuit Breakers : CHECK IN
+- Electrical Equipment : OFF
+- Avionics Master Switch : OFF
+- Fuel Selector Valve : BOTH
+- Fuel Shutoff Valve : ON
+- Avionics Circuit Breakers : CHECK IN
+
+# Battery Engine Start
+- Throttle : OPEN 1/4 INCH
+- Mixture : IDLE CUTOFF
+- Propeller Area : CLEAR
+- Master Switch : ON
+- Flashing Beacon : ON
+- Auxiliary Fuel Pump  : ON
+- Mixture : FULL RICH UNTIL STABLE FUEL FLOW
+- Auxiliary Fuel Pump : OFF
+- Ignition : START
+- Mixture : ADVANCE SMOOTHLY TO RICH
+- Oil Pressure : CHECK
+- Navigation Lights : AS REQUIRED
+- Electrical System : CHECK
+	- Master Switch : OFF
+	- Taxi and Landing Light Switches : ON
+	- Engine RPM : REDUCE
+	- Master Switch : ON
+	- Engine RPM : INCREASE
+	- Ammeter and Low Voltage Annunciator : CHECK
+- Avionics Master Switch : ON
+- Radios : ON
+- Flaps : RETRACT
+- Mixture : LEAN
+
+# Before Takeoff
+- Parking Brake : SET
+- Seat Backs : UPRIGHT
+- Seat and Seat Belts : CHECK SECURE
+- Cabin Doors : CLOSED AND LOCKED
+- Flight Controls : FREE AND CORRECT
+- Fuel Quantity : CHECK
+- Mixture : RICH
+- Fuel Selector Valve : RECHECK BOTH
+- Throttle : 1800 RPM
+	- Magnetos : CHECK
+	- Vacuum Gauge : CHECK
+	- Engine Instruments and Ammeter : CHECK
+- Annunciator Panel : CHECK
+- Throttle : CHECK IDLE
+- Throttle : 1000 RPM OR LESS
+- Throttle Friction Lock : ADJUST
+- Strobe Lights : AS DESIRED
+- Radio and Avionics : SET
+- NAV/GPS Switch : SET
+- Autopilot : OFF
+- Elevator Trim : SET FOR T/O
+- Flaps : SET FOR T/O
+- Brakes : RELEASE
+
+# Normal Takeoff
+- Flaps : 0-10
+- Throttle : FULL OPEN
+- Mixture : RICH
+- At 55 KIAS, ROTATE
+- Climb Speed : 70-80 KIAS
+- Flaps : RETRACT
+
+# Short Field Takeoff
+- Flaps : 10
+- Brakes : APPLY
+- Throttle : FULL OPEN
+- Mixture : RICH
+- Brakes : RELEASE
+- Elevator : TAIL LOW
+- Climb Speed : 57 KIAS UNTIL OBSTACLES CLEARED
+- Flaps : RETRACT at 60 KIAS
+
+# Enroute Climb
+- Airspeed : 70-85 KIAS
+- Throttle : FULL OPEN
+- Mixture : LEAN ABOVE 3000' MSL
+
+# Cruise
+- Power : 2000-2400 RPM
+- Mixture : LEAN
+`\newpage`{=latex}
+
+# Descent
+- Power : AS DESIRED
+- Mixture : ADJUST
+- Altimeter : SET
+- NAV/GPS switch : SET
+- Fuel Selector Valve : BOTH
+- Flaps : AS DESIRED
+	- 0-10 below 110 KIAS
+	- 10-30 below 85 KIAS
+
+# Before Landing
+- Seat Backs : UPRIGHT
+- Fuel Selector Valve : BOTH
+- Mixture : RICH
+- Landing/Taxi Lights : ON
+- Autopilot : OFF
+
+# Normal Landing
+- Airspeed : 65-75 KIAS (Flaps Up)
+- Flaps : AS DESIRED
+	- 0-10 below 110 KIAS
+	- 10-30 below 85 KIAS
+- Airspeed : 60-70 KIAS (Flaps Down)
+- Touchdown : MAIN WHEELS FIRST
+- Landing Roll : LOWER NOSE WHEEL GENTLY
+- Braking : MINIMUM REQUIRED
+
+# Short Field Landing
+- Airspeed : 65-75 KIAS (Flaps Up)
+- Flaps : FULL DOWN
+- Airspeed : 62 KIAS
+- Power : IDLE AFTER CLEARING OBSTACLE
+- Touchdown : MAIN WHEELS FIRST
+- Landing Roll : LOWER NOSE WHEEL GENTLY
+- Braking : APPLY HEAVILY
+- Flaps : RETRACT
+
+# Balked Landing
+- Throttle : FULL OPEN
+- Flaps : RETRACT TO 20
+- Climb Speed : 55 KIAS
+- FLAPS: 10 UNTIL OBSTACLES CLEARED
+- FLAPS: RETRACT AT 60 KIAS
+
+# After Landing
+- Flaps : UP
+
+# Securing Airplane
+- Parking Brake : SET
+- Electrical Equipment : OFF
+- Autopilot : OFF
+- Avionics Master Switch : OFF
+- Mixture : IDLE CUT OFF
+- Ignition Switch : OFF
+- Master Switch : OFF
+- Control Lock : INSTALL
+- Fuel Selector Valve : LEFT or RIGHT
+
