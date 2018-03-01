@@ -1,5 +1,9 @@
 """ Compiles MD to PDF, via TeX and temporary directories
 
+    - If run as routing, takes 1-2 command line arguments
+        1. md_full_path: required
+        2. temp_foplder: optional
+
     TeX class init:
         - md_full_path: path to source markdown file
         - temp_folder: temporary folder to use;
@@ -16,18 +20,26 @@
 import shutil
 import subprocess
 import os
+import sys
 
 
 class TeX(object):
     def __init__(
-            self, md_full_path, temp_folder=None, compile_total=3, in_fix=''):
+            self, md_full_path=None, temp_folder=None,
+            compile_total=3, in_fix=''):
+        if md_full_path is None:
+            if len(sys.argv) > 1:
+                md_full_path = sys.argv[1]
         if temp_folder is None:
-            self.temp_folder = os.path.expanduser(
-                '~/Documents/temporary/latex')
-        else:
-            self.temp_folder = temp_folder
+            if len(sys.argv) > 2:
+                temp_folder = os.path.expanduser(sys.argv)
+            else:
+                temp_folder = os.path.expanduser(
+                    '~/Documents/temporary/latex')
+        self.temp_folder = temp_folder
         # cwd = os.path.abspath(os.path.dirname(md_full_path))
-        self.cwd = os.path.dirname(os.path.abspath(os.path.expanduser(md_full_path)))
+        self.cwd = os.path.dirname(
+            os.path.abspath(os.path.expanduser(md_full_path)))
         root = os.path.splitext(os.path.basename(md_full_path))[0]
         self.fname_md = root + '.txt'
         self.fname_tex = root + '.tex'
@@ -69,7 +81,11 @@ class TeX(object):
 
 
 def main():
-    pass
+    tex_file = TeX()
+    tex_file.prep_temp_directory()
+    tex_file.compile_md()
+    tex_file.apply_sed()
+    tex_file.compile_xetex()
 
 
 def test_code():
@@ -84,4 +100,3 @@ def test_code():
 
 if __name__ == '__main__':
     main()
-    test_code()
