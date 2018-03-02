@@ -37,7 +37,6 @@ class TeX(object):
                 temp_folder = os.path.expanduser(
                     '~/Documents/temporary/latex')
         self.temp_folder = temp_folder + in_fix
-        # cwd = os.path.abspath(os.path.dirname(md_full_path))
         self.cwd = os.path.dirname(
             os.path.abspath(os.path.expanduser(md_full_path)))
         root = os.path.splitext(os.path.basename(md_full_path))[0]
@@ -51,49 +50,26 @@ class TeX(object):
 
     def apply_sed(self, sed_file=None):
         tex_full_path = os.path.join(self.cwd, self.fname_tex)
-        # sed_full_path = os.path.join(self.cwd, self.fname_sed)
         if sed_file is not None:
-            # f = open(sed_full_path, 'w')
-            # subprocess.run(['sed', '-f', sed_file, tex_full_path], stdout=f)
-            # f.close()
-            # shutil.copyfile(
-            #     sed_full_path, os.path.join(self.cwd, self.fname_pdf))
             subprocess.run(
-                ['sed', '-E', '-i', sed_file, tex_full_path])
-        # else:
-        self.fname_sed = self.fname_tex
+                ['sed', '-E', '-i', 'bak', '-f', sed_file, tex_full_path])
 
     def compile_md(self):
-        # shutil.copy(os.path.join(self.cwd, self.fname_md), self.temp_folder)
         md_full_path = os.path.join(self.cwd, self.fname_md)
         tex_full_path = os.path.join(self.cwd, self.fname_tex)
         subprocess.run(['multimarkdown', '-t', 'latex',
                         '-o', tex_full_path, md_full_path])
-        # shutil.copy(tex_full_path, self.cwd)
-
-    def fix_acronyms(self, fname_acro_sed='sed.txt'):
-        tex_full_path = os.path.join(self.cwd, self.fname_sed)
-        acro_sed_cwd = os.path.join(self.cwd, fname_acro_sed)
-        # acro_sed_temp = os.path.join(self.temp_folder, fname_acro_sed)
-        # shutil.copyfile(acro_sed_cwd, acro_sed_temp)
-        # os.chdir(self.temp_folder)
-        shutil.copyfile(tex_full_path, tex_full_path + '.bak')
-        subprocess.run(
-            ['sed', '-E', '-i', acro_sed_cwd, tex_full_path])
-        # os.chdir(self.cwd)
 
     def compile_xetex(self):
 
-        # os.chdir(self.temp_folder)
         tex_full_path = os.path.join(self.cwd, self.fname_tex)
-        # pdf_full_path = os.path.join(self.cwd, self.fname_pdf)
         for i in range(self.compile_total):
             subprocess.run(
                 ['xelatex', '-interaction=batchmode', tex_full_path])
-        # shutil.copy(pdf_full_path, self.cwd)
         l_aux_ext = ['acn', 'acr', 'alg', 'aux', 'glg', 'glo', 'gls',
                      'glsdefs', 'idx', 'ist', 'lof', 'log', 'lot',
-                     'bak', 'old', 'out', 'toc', 'tex.bak', 'tex.old']
+                     'bak', 'old', 'out', 'toc', 'texbak', 'tex.old',
+                     'sedbak']
         for aux_ext in l_aux_ext:
             fname_aux = self.root + self.in_fix + '.' + aux_ext
             try:
