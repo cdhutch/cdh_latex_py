@@ -20,6 +20,7 @@
 import shutil
 import subprocess
 import os
+import re
 import sys
 
 
@@ -81,6 +82,92 @@ class TeX(object):
     def prep_temp_directory(self):
         shutil.rmtree(self.temp_folder, ignore_errors=True)
         os.makedirs(self.temp_folder, exist_ok=True)
+
+    def pass1(self, thicklines=False):
+        re_tbx = re.compile(r'\\Q?TB([RD])\{([^\}]*)\}')
+        re_qtbx = re.compile(r'\\QTB[RD]')
+        fpath_fname_old = self.tex_full_path + '.old'
+        subprocess.run(["mv", self.tex_full_path, fpath_fname_old])
+        print('Reading in: ' + fpath_fname_old)
+        f_read = open(fpath_fname_old, 'r')
+        f_write = open(self.tex_full_path, 'w')
+        re_tabulary = re.compile(r'\\begin\{tabulary\}\{(\S*)\}\{(\S*)\}')
+        re_tablewidth = re.compile(r'\\tablewidth\{([\S]*)\}')
+        column_format = None
+        next_line_table_header = False
+        tbx_num = 1
+        tbx_table_body = ''
+        for line in f_read:
+            # Bold face first line of table
+            if next_line_table_header is True:
+                f_write.write(r'\rowstyle{\bfseries}%')
+                f_write.write('\n')
+                next_line_table_header = False
+            # Set column format to text line having \tablewidth code
+            if re.search(re_tablewidth, line) is not None:
+                column_format = re.sub(re_tablewidth, r'\1', line)[:-2]
+                line = ''
+            # Replace preamble with column format in tabulary environment
+            if re.search(re_tabulary, line) is not None:
+                if column_format is not None:
+                    str_tab_replace = r'\\begin{tabulary}{\1}{' + \
+                        column_format + '}'
+                    line = re.sub(re_tabulary, str_tab_replace, line)
+                    column_format = None
+                next_line_table_header = True
+            # Replace toprule, bottomrule, midrule with hline
+            # to allow vertical lines in tables
+            line = re.sub(r'\\toprule', '\hline', line)
+            line = re.sub(r'\\bottomrule', '\hline', line)
+            line = re.sub(r'\\midrule', '\hline', line)
+            # Seek TBR/TBD codes
+            m = re.search(re_tbx, line)
+            while m is not None:
+                tbx_num_label = 'tbx_' + '{:d}'.format(tbx_num)
+                mm = re.search(re_qtbx, line)
+                if mm is not None:
+                    tbx_label = '\label{' + tbx_num_label + '}'
+                else:
+                    tbx_label = 'TB' + m.group(1) + '\label{' + tbx_num_label + '}'
+                line_new = re.sub(re_tbx, tbx_label, line)
+                # print(line_new)
+                line = line_new
+                tbx_table_body += 'TB' + m.group(1) + ' & ' +\
+                                  m.group(2) + ' & \pageref{' + \
+                    tbx_num_label + '}  \\\\ \n \\hline \n'
+                tbx_num += 1
+                m = re.search(re_tbx, line)
+            f_write.write(line)
+        print('Writing out: ' + self.tex_full_path)
+        f_write.close()
+        return tbx_table_body
+
+    def pass2(self):
+        tbx_table_start = r'''
+            \clearpage
+            \sffamily
+            \bfseries
+            \center{\large TBX LIST\par}
+            \normalfont
+            \centering
+            \begin{table}[htbp]
+            \begin{minipage}{\linewidth}
+            \setlength{\tymax}{0.5\linewidth}
+            \centering
+            \small\begin{tabular}{| >{\centering\arraybackslash}m{1.25in}| >{\centering\arraybackslash}m{2.95in}| >{\centering\arraybackslash}m{1.5in}|} \hline
+            \bfseries{Item} & \bfseries{Description} & \bfseries{Page}\\
+            \hline
+            '''
+
+        tbx_table_end = r'''\end{tabular}
+        \end{minipage}
+        \end{table}
+        \raggedright
+        \clearpage'''
+
+        f_write = open('tbx_table.tex', 'w')
+        f_write.write(tbx_table_start + self.tbx_table_body + tbx_table_end)
+        f_write.close()
 
 
 def main():
