@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import os
-# import pandas as pd
 import subprocess
 import sys
 import datetime
@@ -31,17 +30,15 @@ class RequirementDoc(object):
         pass
 
     def pre_compile(self, rs):
-        # start_dir = os.getcwd()
-        # rs = RequirementSet()
-        # rs.csv_fname = sys.argv[2]
-        # rs.temp_dir = os.path.expanduser('~/Documents/temporary/cpf-smrd-compile/')
-        # rs.temp_dir = self.temp_dir
-        # rs.d_supplemental_files = {'SCI.24000': 'std_sci_data_products.txt',
-        #                            'GS.23000': 'poc_cpoc_icd.txt'}
-        # rs.d_unique_headings = {
-        #     '4.2.1': '\n## Mission Requirements  \n',
-        #     '4.2.2.1': '\n### Science Segment Requirements  \n'}
-        rs.prep_temp_directory()
+        shutil.rmtree(rs.temp_dir, ignore_errors=True)
+        os.makedirs(rs.temp_dir, exist_ok=True)
+        l_extensions = ['tex', 'txt', 'png', 'csv', 'pdf']
+        files = [f for f in os.listdir('.') if os.path.isfile(f)]
+        for f in files:
+            ext = f.split('.')[-1]
+            if ext in l_extensions:
+                shutil.copy(f, rs.temp_dir)
+        # rs.prep_temp_directory()
         rs.req_md_fname = rs.csv_fname.split('.')[0] + '_reqs.txt'
         rs.load_rs()
         rs.write_reqs()
@@ -58,8 +55,7 @@ class RequirementDoc(object):
         subprocess.run(['sed', '-E', '-i', '', s_sed,
                         'mmd6-cpf-page-styles.tex'])
 
-    def compile(self, rs, l_infix):
-        # scriv_fname = sys.argv[1]
+    def compile(self, rs, l_infix=['']):
         for infix in l_infix:
             version_md_full_path = os.path.abspath(
                 os.path.expanduser(
@@ -69,7 +65,8 @@ class RequirementDoc(object):
             req_doc_tex.prep_temp_directory()
             os.chdir(req_doc_tex.cwd)
             fname_reqs_md = os.path.join(
-                req_doc_tex.cwd, rs.req_md_fname.split('.')[0] + infix + '.txt')
+                req_doc_tex.cwd,
+                rs.req_md_fname.split('.')[0] + infix + '.txt')
             shutil.copy(fname_reqs_md, os.path.join(
                 req_doc_tex.cwd, 'reqs_compile.txt'))
             shutil.copy('rev_hist' + infix + '.tex', 'rev_hist_compile.tex')
