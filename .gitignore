@@ -2,3 +2,4 @@
 *.pyc
 .idea/workspace.xml
 */compile_tex.cpython-36.pyc
+__pycache__/compile_tex.cpython-36.pyc
