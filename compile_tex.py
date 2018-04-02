@@ -22,6 +22,7 @@ import subprocess
 import os
 import re
 import sys
+import datetime
 
 
 class TeX(object):
@@ -48,6 +49,16 @@ class TeX(object):
         self.fname_pdf = root + in_fix + '.pdf'
         self.compile_total = compile_total
         self.in_fix = in_fix
+
+    def write_mmd_header(self, f, title):
+        f.write('latex leader:       mmd6-article-leader\n')
+        f.write('Author:             Craig Hutchinson\n')
+        f.write('Title:              ' + title + '  \n')
+        f.write('Date:    ' +
+                datetime.datetime.now().strftime('%d %B %Y') + '  \n')
+        f.write('Base Header Level:  2  \n')
+        f.write('latex begin:        mmd6-article-begin  \n')
+        f.write('latex footer:       mmd6-article-footer\n\n')
 
     def apply_sed(self, sed_file=None):
         tex_full_path = os.path.join(self.cwd, self.fname_tex)
@@ -77,6 +88,7 @@ class TeX(object):
                 shutil.move(os.path.join(self.cwd, fname_aux),
                             os.path.join(self.temp_folder, fname_aux))
             except FileNotFoundError:
+                print(fname_aux)
                 pass
 
     def prep_temp_directory(self):
