@@ -1,2 +1,4 @@
 *.cpython-36.pyc
 *.pyc
+.idea/workspace.xml
+*/compile_tex.cpython-36.pyc
