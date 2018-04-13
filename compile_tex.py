@@ -2,7 +2,7 @@
 
     - If run as routing, takes 1-2 command line arguments
         1. md_full_path: required
-        2. temp_foplder: optional
+        2. temp_folder: optional
 
     TeX class init:
         - md_full_path: path to source markdown file

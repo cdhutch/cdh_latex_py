@@ -1,0 +1,60 @@
+\ifglsentryexists{OTCM}{}%
+{%
+\gls@defglossaryentry{OTCM}%
+{%
+name={OTCM},%
+sort={OTCM},%
+type={acronym},%
+first={ORU Tool Changeout Mechanism\glsspace (OTCM)},%
+firstplural={ORU Tool Changeout Mechanism\acrpluralsuffix \glsspace (OTCM\acrpluralsuffix )},%
+text={OTCM},%
+plural={OTCM\acrpluralsuffix },%
+description={ORU Tool Changeout Mechanism},%
+descriptionplural={ORU Tool Changeout Mechanism\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={ORU Tool Changeout Mechanism},%
+longplural={ORU Tool Changeout Mechanisms},%
+short={OTCM},%
+shortplural={OTCMs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{EOTP}{}%
+{%
+\gls@defglossaryentry{EOTP}%
+{%
+name={EOTP},%
+sort={EOTP},%
+type={acronym},%
+first={Enhanced ORU Temporary Platform\glsspace (EOTP)},%
+firstplural={Enhanced ORU Temporary Platform\acrpluralsuffix \glsspace (EOTP\acrpluralsuffix )},%
+text={EOTP},%
+plural={EOTP\acrpluralsuffix },%
+description={Enhanced ORU Temporary Platform},%
+descriptionplural={Enhanced ORU Temporary Platform\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Enhanced ORU Temporary Platform},%
+longplural={Enhanced ORU Temporary Platforms},%
+short={EOTP},%
+shortplural={EOTPs},%
+counter={page},%
+parent={},%
+%
+}%
+}%

@@ -32,7 +32,9 @@ def find_expand(path_to_tds, path_to_texfile, f_write, re_input, cwd):
                 tree_dir, input_fname = file_seek(
                     path_to_tds, input_code + '.tex')
             except TypeError:
-                # print('Error')
+                # print('TypeError')
+                # print(cwd)
+                # print(input_code + '.tex')
                 tree_dir, input_fname = file_seek(cwd, input_code + '.tex')
             input_fname_fullpath = os.path.join(tree_dir, input_fname)
             find_expand(
@@ -43,16 +45,16 @@ def find_expand(path_to_tds, path_to_texfile, f_write, re_input, cwd):
     f_read.close()
 
 
-def main():
-    if len(sys.argv) < 2 or len(sys.argv) > 3:
+def expand(argv):
+    if len(argv) < 2 or len(argv) > 3:
         raise ValueError(
             '''expand_tex.py either one or two arguments.\n
             Use expand.py file.tex [path_to_texmf]''')
-    path_to_texfile = os.path.expanduser(sys.argv[1])
+    path_to_texfile = os.path.expanduser(argv[1])
     cwd = os.path.dirname(os.path.abspath(path_to_texfile))
     path_to_tds = '~/Library/texmf'
-    if len(sys.argv) == 3:
-        path_to_tds = sys.argv[2]
+    if len(argv) == 3:
+        path_to_tds = argv[2]
     path_to_tds = os.path.expanduser(path_to_tds)
     # print(path_to_tds, path_to_texfile)
     f_write = open(path_to_texfile + '_expanded.tex', 'w')
@@ -61,7 +63,8 @@ def main():
     f_write.close()
     shutil.copyfile(path_to_texfile + '_expanded.tex',
                     path_to_texfile + '_expanded_backup.tex')
+    return (path_to_texfile + '_expanded.tex')
 
 
 if __name__ == '__main__':
-    main()
+    expand(sys.argv)

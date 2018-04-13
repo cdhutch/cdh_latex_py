@@ -1,0 +1,101 @@
+latex leader:		mmd6-article-leader
+Author:				Craig Hutchinson
+Title:				Details for CLARREO Pathfinder SMRD Revision B Change Request (CPF-CR-012)
+Date:				21 February 2018
+Base Header Level:	2  
+latex begin:		mmd6-article-begin  
+latex footer:		mmd6-article-footer
+
+# General Changes
+
+- Reorganized science and mission requirements so that only mission requirements are allocated to LASP-delivered elements
+- Rewrote last paragraph in 3.1 Mission Description to match recently-signed PLRA
+- Rewrote section 4.0 Requirements to reflect reorganized requirements
+- Rewrote requirement statements to ensure their grammatical subjects are the elements to which the requirements are allocated
+- Corrected grammar, spelling, and diction
+
+# Specific Changes to Science Requirements
+
+`\renewcommand\thesection{Change \arabic{section}}`{=latex}
+`\setlength{\parskip}{1em}`{=latex}
+
+
+## CPF.20004: Spectrally Resolved Earth Reflectance (requirement number change)
+
+From: RS.21004  
+
+To: **CPF.20004**
+
+Rationale: Science requirements apply to the entire CLARREO Pathfinder, not just the CLARREO Pathfinder Reflected Solar Payload
+
+## CPF.20005: Broadband Earth Reflectance (requirement number change)
+
+From: RS.21005
+
+To: **CPF.20005**
+
+Rationale: Science requirements apply to the entire CLARREO Pathfinder, not just the CLARREO Pathfinder Reflected Solar Payload
+
+## CPF.20050: Inter-Calibration Samples (requirement number change)
+
+From: RS.21005  
+
+To: **CPF.20050**
+
+Rationale: Science requirements apply to the entire CLARREO Pathfinder, not just the CLARREO Pathfinder Reflected Solar Payload
+
+# Specific Changes to Mission Requirements
+
+## RS.21000: Wavelength
+
+From: The CPRSP wavelength range for the instrument shall be 350 - 2300 nm.
+
+To: The CPRSP **shall measure over** the **wavelength range of** 350-2300 nm.
+
+Rationale: Allocated element is grammatical subject of requirement statement
+
+## RS.21004: Spectrally Resolved Earth Reflectance
+
+From: The **CLARREO Pathfinder** shall acquire on-orbit SI-traceable spectrally resolved Earth reflectances referenced to spectral solar irradiance with average uncertainty <= 0.3% (k=1) for the 350 - 2300 nm wavelength range.
+
+To: The **CPRSP** shall acquire on-orbit SI-traceable spectrally resolved Earth reflectances referenced to spectral solar irradiance with average uncertainty <= 0.3% (k=1) for the 350 - 2300 nm wavelength range.
+
+Rationale: Requirement now derived from CPF.20004 and allocated to CPRSP.
+
+## RS.21005: Broadband Earth Reflectance
+
+From: The **CLARREO Pathfinder** shall acquire on-orbit SI-traceable broadband reflectance (350 - 2300 nm) of Earth scenes with uncertainty <= 0.3% (k=1).
+
+To: The **CPRSP** shall acquire on-orbit SI-traceable broadband reflectance (350 - 2300 nm) of Earth scenes with uncertainty <= 0.3% (k=1).
+
+Rationale: Requirement now derived from CPF.20005 and allocated to CPRSP.
+
+## SCI.24040: ESDIS Compliance
+
+From: The CSDS Level 0 and Level 1B data products metadata shall conform to ISO 19115 Geographic Information - Metadata standards and adhere to the Metadata Requirements --- Base Reference for NASA Earth Science Data Products document published at http://earthdata.nasa.gov/about-eosdis/requirements. 
+
+To: The CSDS **shall generate** Level 0 and Level 1B data products **whose metadata** conform to ISO 19115 Geographic Information - Metadata standards and adhere to the Metadata Requirements --- Base Reference for NASA Earth Science Data Products document published at http://earthdata.nasa.gov/about-eosdis/requirements. 
+
+Rationale: Allocated element is grammatical subject of requirement statement
+
+## SCI.24140: ESDIS Compliance
+
+From: The ICPP Level 4 data products metadata will conform to ISO 19115 Geographic Information - Metadata standards and adhere to the Metadata Requirements --- Base Reference for NASA Earth Science Data Products document published at http://earthdata.nasa.gov/about-eosdis/requirements.
+
+To: The ICPP **will generate** Level 4 data products **whose metadata** conform to ISO 19115 Geographic Information - Metadata standards and adhere to the Metadata Requirements --- Base Reference for NASA Earth Science Data Products document published at http://earthdata.nasa.gov/about-eosdis/requirements.
+
+Rationale: Allocated element is grammatical subject of requirement statement
+
+## GS.23000: POIC Interface
+
+From: The CPOC interfaces with the ISS POIC shall comply with the CPOC to POIC ICD (TBD).
+
+To: The CPOC **shall interface** with the ISS POIC **in accordance** with the CPOC to POIC ICD (TBD).
+
+Rationale: Allocated element is grammatical subject of requirement statement
+
+## GS.23060: Inter-Calibration Prioritization
+
+New: **The CPOC shall command the CPRSP to execute a sufficient number of inter-calibration events to meet the performance measures specified in CPF.20050.**
+
+Rationale: This is the inter-calibration science requirement (CPF.20050) allocated to the CPOC

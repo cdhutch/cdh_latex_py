@@ -1,0 +1,78 @@
+latex leader:		mmd6-article-leader
+Author:				Craig Hutchinson
+Title:				Details for CLARREO Pathfinder SMRD Revision A Change Request (CPF-CR-011)
+Date:				2 January 2018
+Base Header Level:	2  
+latex begin:		mmd6-article-begin  
+latex footer:		mmd6-article-footer
+
+# General Changes
+
+- Deleted RS.21013 to reflect updated approach to address measurements not specified by PLRA
+- Added RS.21045 and SCI.24050 to address new PLRA requirements
+- Changed "shall" statements for RS.21011, RS.21050, RS.21055, and GS.23000
+- Updated Applicable and Reference Documents
+- Incorporated RBI as an Inter-Calibration Instrument in architecture
+- Corrected grammar, spelling, and diction
+- Aligned System Architecture (3.3) and Segment Definition (3.4) with Mission CONOPS (CPF-02-009)
+- Updated formatting to align with CPF document template
+
+# Specific Changes to Requirements
+
+`\renewcommand\thesection{Change \arabic{section}}`{=latex}
+`\setlength{\parskip}{1em}`{=latex}
+
+
+## RS.21011:  Angular Matching for Inter-Calibration  
+
+From: The CPRSP shall perform Inter-Calibration sampling by directing the CPRSP instrument boresight to within 1 degree (k=1) of a time-varying direction that is determined by the line of sight from the Inter-calibrated instrument (at some instant of time consistent with the temporal matching requirement) to the CPRSP instrument.  
+
+To: **The CPRSP shall perform Inter-Calibration sampling by directing the HySICS Instrument boresight to within 0.7 degree (k=1) of a time-varying direction that is determined by the line of sight from the Inter-Calibration Instrument (at some instant of time consistent with the temporal matching requirement) to the HySICS Instrument.**  
+
+Rationale for Change: Result of Carlos Roithmayr identifying that the angle specified in prior requirement was not the same as angle specified in Wielicki et al, IGARSS 2008. Discussions at 16 November 2017 Inter-Calibration meeting and subsequent communications generated new requirement verbiage as well as rationale, verification description, and success criteria. LASP and LaRC concurred with changes on 29 November 2017  
+
+## RS.21045: Decommissioning  
+
+New: **The CPRSP shall be capable of completing decommissioning activities within three months following the end of the science mission.**  
+
+Rationale for Change: Refines requirement in PLRA paragraph 4.2.k, which SMRD had not previously addressed
+
+## RS.21050: Inter-Calibration Samples  
+
+From: The CLARREO Pathfinder shall collect inter-calibration sampling with CERES and VIIRS sufficient to limit uncertainty contribution within 1 year of operations as specified in requirements RS.21004 and RS.21005.  
+
+To: **The CLARREO Pathfinder shall collect inter-calibration sampling with CERES or RBI and VIIRS sufficient to limit uncertainty contribution within 1 year of operations as specified in requirements RS.21004 and RS.21005.**
+
+Rationale for Change: PLRA draft v12 specifies RBI as an additional inter-calibration instrument.
+
+## RS.21055: Inter-Calibration Swath Width
+
+From: The CPRSP shall be capable of aiming the instrument boresight to match the full CERES or RBI and VIIRS instrument swath width (plus or minus 55°) when not obscured by ISS structure.
+
+To: **The CPRSP shall be capable of aiming the instrument boresight to match the full CERES, RBI, and VIIRS instrument swath width (plus or minus 55°) when not obscured by ISS structure.**
+
+Rationale for Change: More precise specification of RBI being an Inter-Calibration instrument against whose swath width the CPRSP needs to match.
+
+## RS.21013: Characterization of Land Sites  
+
+Deleted: The CPRSP shall have the ability to perform pointing operations such that the CPRSP can view specified Earth locations at least twice during one pass with sufficient surface coverage of 70 km by 100 km (nadir equivalent).  
+
+Rationale for Change: Requirement has no parent in PLRA, which only specifies LEO inter-calibration among four inter-calibration events. Requirement as written addresses payload technical capability that is already satisfied by more stringent pointing requirements: RS.21010 Pointing Accuracy for Instrument Calibration, RS.21011 Angular Matching for Inter-Calibration. Actual tasking and planning will be implemented by future science and operations teams. LaRC, LASP, and Kurt Thome concurred on dropping requirement during 28 November 2017 inter-calibration meeting.  
+
+## SCI.24050: Full Resolution Browse Products  
+
+New: **The CSDS shall deliver to the NASA DAAC full-resolution browse products for all science data.**  
+
+Rationale for Change: Refines requirement in PLRA paragraph 4.5.1.1.c, which SMRD had not previously addressed
+
+
+## GS.23000: POIC Interface  
+
+From: The CPOC interfaces with the ISS POIC shall comply with the CPOC to POIC ICD (SSP-TBD).  
+
+To: **The CPOC interfaces with the ISS POIC shall comply with the CPOC to POIC ICD (TBD).**  
+
+Rationale for Change: Changed parenthetical to generalize TBD in requirement statement.
+
+
+

@@ -1,0 +1,25 @@
+`
+\begin{table}[htbp]
+\begin{minipage}{\linewidth}
+\setlength{\tymax}{0.5\linewidth}
+\centering
+\small
+\caption{Standard Science Data Products}
+\label{tbl_std_sci_data_prod}
+\begin{threeparttable}
+\begin{tabulary}{\textwidth}{|+p{1.0in}|^p{3.0in}|^p{0.75in}|^p{0.75in}|} \hline
+\rowstyle{\bfseries}%
+ Data Product & Description                                                         & First Data Delivery after IOC & Maximum data latency after first release\tnote{1} \\
+\hline
+ Level 0   & Reconstructed, unprocessed instrument and payload data at full resolution, with any and all communications artifacts (e.g., synchronization frames, communications headers, duplicate data) removed.           & 4 months       & 48 hours         \\
+ Level 1B  & Calibrated and geolocated observations at full resolution, annotated with ancillary information such as radiometric and geometric calibration coefficients and georeferencing parameters (e.g., platform ephemeris).       & 8 months       & 1 month         \\
+ Level 4   & Time\slash angle\slash space matched inter--calibration data for reference (CPF) and target sensors (CERES or RBI and VIIRS), scene information from target sensors (CERES or RBI and VIIRS), modeled parameters for estimated polarization and radiometric corrections. & 10 months      & 6 months         \\
+\hline
+\end{tabulary}
+\begin{tablenotes}
+\item[1] Data latency is defined as the elapsed time from the downlink to the availability of processed data products to the public.
+\end{tablenotes}
+\end{threeparttable}
+\end{minipage}
+\end{table}
+`{=latex}
