@@ -1,3 +1,10 @@
+''' Takes paths to two LaTeX files, expands them as necessary, computes diff, then compiles
+
+    Syntax: latex_diff.py <path_to_old_file> <path_to_new_file> <path_to_temporary_directory>
+    Result is diff.pdf file in <path_to_temporary_directory>
+'''
+
+
 import sys
 import os
 import expand_tex
