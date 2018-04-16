@@ -1,0 +1,19 @@
+latex leader:		mmd6-article-leader
+Author:				Craig Hutchinson
+Title:				Details for CLARREO Pathfinder SMRD Revision C Change Request (CPF-CR-013)
+Date:				16 April 2018
+Base Header Level:	2  
+latex begin:		mmd6-article-begin  
+latex footer:		mmd6-article-footer
+
+# General Changes
+
+- Removed references to portions of architecture below level 3 in hierarchy, to preserve design flexibility to components not specifed by SMRD requirements
+
+# Specific Changes to Mission Requirements
+
+**[RS.22010]** Compliance with Payload Interface Agreement Resource Allocations  
+
+New: **The CPRSP shall meet the resource allocations documented within the CPF to ISS PIA.**
+
+Rationale: By direction of and negotiated with ESM PO on 13 April 2018.
