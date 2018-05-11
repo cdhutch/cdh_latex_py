@@ -2,7 +2,7 @@
 
     - If run as routing, takes 1-2 command line arguments
         1. md_full_path: required
-        2. temp_foplder: optional
+        2. temp_folder: optional
 
     TeX class init:
         - md_full_path: path to source markdown file
@@ -50,15 +50,16 @@ class TeX(object):
         self.compile_total = compile_total
         self.in_fix = in_fix
 
-    def write_mmd_header(self, f, title):
-        f.write('latex leader:       mmd6-article-leader\n')
+    def write_mmd_header(self, f, title, mmd_template='article'):
+        f.write('latex config: {:s}'.format(mmd_template))
+        # f.write('latex leader:       mmd6-article-leader\n')
         f.write('Author:             Craig Hutchinson\n')
         f.write('Title:              ' + title + '  \n')
         f.write('Date:    ' +
                 datetime.datetime.now().strftime('%d %B %Y') + '  \n')
         f.write('Base Header Level:  2  \n')
-        f.write('latex begin:        mmd6-article-begin  \n')
-        f.write('latex footer:       mmd6-article-footer\n\n')
+        # f.write('latex begin:        mmd6-article-begin  \n')
+        # f.write('latex footer:       mmd6-article-footer\n\n')
 
     def apply_sed(self, sed_file=None):
         tex_full_path = os.path.join(self.cwd, self.fname_tex)
