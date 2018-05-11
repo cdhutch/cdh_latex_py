@@ -51,7 +51,7 @@ class TeX(object):
         self.in_fix = in_fix
 
     def write_mmd_header(self, f, title, mmd_template='article'):
-        f.write('latex config: {:s}'.format(mmd_template))
+        f.write('latex config: {:s}\n'.format(mmd_template))
         # f.write('latex leader:       mmd6-article-leader\n')
         f.write('Author:             Craig Hutchinson\n')
         f.write('Title:              ' + title + '  \n')
