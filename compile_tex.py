@@ -68,17 +68,17 @@ class TeX(object):
                 ['sed', '-E', '-i', 'bak', '-f', sed_file, tex_full_path])
 
     def compile_md(self):
-        md_full_path = os.path.join(self.cwd, self.fname_md)
-        tex_full_path = os.path.join(self.cwd, self.fname_tex)
+        self.md_full_path = os.path.join(self.cwd, self.fname_md)
+        self.tex_full_path = os.path.join(self.cwd, self.fname_tex)
         subprocess.run(['multimarkdown', '-t', 'latex',
-                        '-o', tex_full_path, md_full_path])
+                        '-o', self.tex_full_path, self.md_full_path])
 
     def compile_xetex(self):
 
-        tex_full_path = os.path.join(self.cwd, self.fname_tex)
+        self.tex_full_path = os.path.join(self.cwd, self.fname_tex)
         for i in range(self.compile_total):
             subprocess.run(
-                ['xelatex', '-interaction=batchmode', tex_full_path])
+                ['xelatex', '-interaction=batchmode', self.tex_full_path])
         l_aux_ext = ['acn', 'acr', 'alg', 'aux', 'glg', 'glo', 'gls',
                      'glsdefs', 'idx', 'ist', 'lof', 'log', 'lot',
                      'bak', 'old', 'out', 'toc', 'texbak', 'tex.old',
