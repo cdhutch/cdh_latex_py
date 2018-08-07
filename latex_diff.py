@@ -48,6 +48,7 @@ def run_latexdiff(l_expand_tex, temp_path):
     os.waitpid(p.pid, 0)
     return diff_tex
 
+
 def compile_diff(diff_tex):
     os.chdir(os.path.dirname(diff_tex))
     for i in range(3):

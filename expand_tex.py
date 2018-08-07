@@ -37,11 +37,13 @@ def find_expand(path_to_tds, path_to_texfile, f_write, re_input, cwd):
                 # print(input_code + '.tex')
                 tree_dir, input_fname = file_seek(cwd, input_code + '.tex')
             input_fname_fullpath = os.path.join(tree_dir, input_fname)
+            print(input_fname_fullpath)
             find_expand(
                 path_to_tds, input_fname_fullpath, f_write, re_input, cwd)
             f_write.write('% ***End: ' + input_code + '\n')
             continue
         f_write.write(line)
+        print(line)
     f_read.close()
 
 
