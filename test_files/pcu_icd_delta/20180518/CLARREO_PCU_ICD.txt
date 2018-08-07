@@ -1,0 +1,273 @@
+latex leader:		mmd6-cpf-leader
+Author:				Craig Hutchinson
+Title:				Power Converter Unit Interface Control Document
+Date:				18 May 2018
+ReleaseDate:		TBD
+Document Number:	CPF-02-024
+TitlePageRevision: PRELIMINARY
+Revision:			Preliminary
+Watermark:			Draft
+Base Header Level:	2  
+latex mode:		memoir
+latex begin:		mmd6-cpf-begin  
+latex footer:		mmd6-cpf-footer
+
+[>ABI]: Advanced Baseline Imager
+[>ADCO]: Attitude Determination and Control Officer
+[>AFRAM]: Active Flight Releasable Attachment Mechanism
+[>AGRI]: Advanced Geosynchronous Radiation Imager
+[>ASDC]: Atmospheric Sciences Data Center
+[>ATBD]: Algorithm Theoretical Basis Document
+[>ATL]: Attitude Timeline
+[>AVHRR]: Advanced Very High Resolution Radiometer
+[>BAD]: Broadcast Ancillary Data
+[>BASEPLATE]: Beta, Attitude, Significant Event Planning Table
+[>CERES]: Clouds and Earth's Radiant Energy System
+[>CLARREO]: Climate Absolute Radiance and Refractivity Observatory
+[>COMS]: Communication, Ocean, and Meteorological Satellite
+[>CPF]: CLARREO Pathfinder
+[>CPOC]: CPF Payload Operations Center
+[>CPRSP]: CLARREO Pathfinder Reflected Solar Payload
+[>CSDS]: CPF Science Data System
+[>CSTOL]: Colorado System Test and Operations Language
+[>DAAC]: Distributed Active Archive Center
+[>DEWG]: Dynamic Events Working Group
+[>EEE]: Electrical, Electronic, and Electromechanical
+[>EOSDIS]: Earth Observing System Data and Information System
+[>ESDIS]: Earth Science Data and Information System
+[>ELC]: ExPRESS Logistics Carrier
+[>EOTP]: Enhanced ORU Temporary Platform
+[>EUMETSAT]: European Organization for the Exploitation of Meteorological Satellites
+[>ExPA]: ExPRESS Pallet Adapter
+[>ExPRESS]: Expedite the Processing of Experiments to Space Station
+[>FC]: Flight Controller
+[>FD]: Flight Director
+[>FLAWS]: Flight Anomaly Worksheet
+[>FPA]: Focal Plane Array
+[>FPE]: Focal Plane Electronics
+[>FOV]: Field of View
+[>FRAM]: Flight Releasable Attach Mechanism
+[>FSW]: Flight Software
+[>GEO]: Geostationary Earth Orbit
+[>GOCI]: Geostationary Ocean Color Imager
+[>GOES]: Geostationary Operational Environmental Satellite
+[>GRAWS]: Ground Anomaly Worksheet
+[>GSFC]: Goddard Space Flight Center
+[>HFSS]: High-rate Fine Sun Sensor
+[>HOSC]: Huntsville Operations Support Center
+[>H&S]: Health and Status
+[>HySICS]: HyperSpectral Imager for Climate Science
+[>HPS]: HySICS Pointing System
+[>HVPS]: High Voltage Power Supply
+[>IC SIPS]: Inter-Calibration Science Investigator Processing System
+[>ICPP]: Inter-Calibration Planning and Processing element
+[>ICS]: ISS Communications Services
+[>IT]: Information Technology
+[>IMU]: Inertial Measurement Unit
+[>IRS]: Indian Remote Sensing
+[>HISIE]: HySICS Instrument-Spacecraft Interface Electronics
+[>ICD]: Interface Control Document
+[>IDD]: Interface Definition Document
+[>ISRO]: Indian Space Research Organization
+[>ISS]: International Space Station
+[>JPSS]: Joint Polar Satellite System
+[>JSC]: Johnson Space Center
+[>KARI]: Korea Aerospace Research Institute
+[>KSC]: Kennedy Space Center
+[>LAADS]: Level-1 and Atmosphere Archive and Distribution System
+[>LaRC]: Langley Research Center
+[>LASP]: The University of Colorado Laboratory for Atmospheric and Space Physics
+[>LEO]: Low Earth Orbit
+[>LPF]: Launch Provider Facility
+[>MCC-H]: Mission Control Center-Houston
+[>MODS]: Mission Operations and Data Systems
+[>MSFC]: Marshall Space Flight Center
+[>MTG-I]: Meteosat Third Generation-Imaging
+[>NATC]: NASA Threaded Coupling
+[>NOAA]: National Oceanic and Atmospheric Administration
+[>NPP]: National Polar-orbiting Partnership
+[>OASIS-CC]: Operations and Science Instrument Support Command Control
+[>OASIS-PS]: Operations and Science Instrument Support Planning and Scheduling
+[>OLI]: Operational Land Imager
+[>ORU]: Orbital Replacement Unit
+[>OTCM]: ORU Tool Changeout Mechanism
+[>PCU]: Power Converter Unit
+[>PDL]: Payload Data Library
+[>PFRAM]: Passive Flight Releasable Attachment Mechanism
+[>POIC]: Payload Operations Integration Center
+[>PRCU]: Payload Rack Checkout Unit
+[>PRT]: Platinum Resistance Thermometer
+[>PRTs]: Platinum Resistance Thermometers
+[>RAPTR]: Remote Advanced Payload Test Rig 
+[>RBI]: Radiation Budget Instrument
+[>RS]: Reflected Solar
+[>SAPP]: Space Asset Protection Program
+[>SDP]: Science Data Processing
+[>SI]: Système Internationale
+[>SIM]: Spectral Irradiance Monitor
+[>SMRD]: Science and Mission Requirements Document
+[>SPDM]: Special Purpose Dexterous Manipulator
+[>SSF]: Single Satellite Footprint
+[>SSPF]: Space Station Processing Facility
+[>STK]: Systems Tool Kit
+[>SWIR]: Shortwave Infrared
+[>TDP]: Telemetry Data Processing
+[>TDRSS]: Tracking and Data Relay Satellite System
+[>TEA]: Torque Equilibrium Attitude
+[>TIMs]: Technical Interchange Meetings
+[>TLE]: Two-Line Element
+[>TLM]: Telemetry
+[>TOPO]: Trajectory Operations Officer
+[>TQSM]: Telemetry Quality and System Monitoring
+[>TReK]: Telescience Resource Kit
+[>TSIS]: Total and Spectral Solar Irradiance Sensor
+[>UDP]: User Datagram Protocol
+[>USGS]: United States Geological Survey
+[>VDC]: Volts direct current
+[>VIIRS]: Visible Infrared Imaging Radiometer Suite
+[>VNIR]: Visible Near Infrared
+[>VPN]: Virtual Private Network
+[>WSTF]: White Sands Test Facility
+
+# Introduction #
+
+## Purpose and Scope ##
+
+This document establishes the PCU requirements, which specify the subsystem that converts 120 VDC Operational Power to 28 VDC power suitable for the other CPRSP subsystems.
+
+## Document Organization ##
+
+`\autoref{sec_docs}`{=latex} lists applicable and reference documents. `\autoref{conops}`{=latex} provides the PCU concept of operations. `\autoref{interfaces}`{=latex} discusses the external interfaces and boundaries of the PCU. `\autoref{sec_req}`{=latex} contains the technical requirements. Appendix A defines acronyms.
+
+# Documents [sec_docs] #
+
+This section identifies documents that are applicable to this document and assumes the current version unless otherwise noted. Reference documents are for information only.
+
+## Applicable Documents ##
+
+`
+\tablewidth{|+p{1.8in}|^p{4.2in}||}
+% Double vertical bar above is kludge to get around python code bug
+`{=latex}
+
+| Document Number | Document Title |
+| :-- | :-- |
+| CPF-02-002 | CLARREO Pathfinder Systems Engineering Management Plan |
+| CPF-02-009 | CLARREO Pathfinder Mission Concept of Operations |
+| CPF-02-011 | CLARREO Pathfinder Science and Mission Requirements Document |
+| CPF-03-001 | CLARREO Pathfinder Mission Assurance Requirements |
+| LASP Document No. 154920 | CLARREO-Pathfinder PCU Electrical Interface Control Document |
+
+## Reference Documents ##
+
+
+`
+\tablewidth{|+p{1.8in}|^p{4.2in}||}
+% Double vertical bar above is kludge to get around python code bug
+`{=latex}
+
+
+| Document Number | Document Title |
+| :-- | :-- |
+| D683-97497-01 Revision E | Expedite the Processing of Experiments to Space Station (ExPRESS) Pallet Adapter (ExPA) Interface Definition Document (IDD) |
+| Forgrave, Man, and Newell (1999) | Spacecraft Acoustic and Random Vibration Test Optimization |
+| GSFC-STD-1000G | Goddard Space Flight Center Rules for the Design, Development, Verification, and Operation of Flight Systems |
+| GSFC-STD-7000A | General Environmental Verification Standard |
+| SpX-00036031 | Dragon FRAM Payloads Interface Requirements Document (IRD) |
+| SSP 30237 | Space Station Electromagnetic Emission and Susceptibility Requirements |
+| SSP 30245 | Space Station Electrical Bonding Requirements |
+| SSP 30512 | Space Station Ionizing Radiation Design Environment |
+| SSP 51700 | Payload Safety Policy and Requirements for the International Space Station |
+| SSP 52005 | Payload Flight Equipment Requirements and Guidelines for Safety-Critical Structures |
+| SSP 57003 Revision L | External Payload Interface Requirements Document |
+
+## Document Control ##
+
+This document is managed by the CPF Project and, after initial approval, will be placed under configuration control using the change management processes defined in the CLARREO Pathfinder Configuration Management Operating Procedure (CPF-01-005).
+
+## Order of Precedence ##
+
+The Program-Level Requirements and Project-Level plans listed in the applicable documents section take precedence over the PCU ICD. Nothing in this document, however, supersedes applicable laws and regulations.
+
+# Concept of Operations [conops] #
+
+The Power Converter Unit is a part of the CPRSP, along with the HISIE, HPS, HySICS Instrument, and ExPA. The PCU's primary role is to convert 120 VDC Operational Power provided by the ELC to 28 VDC Power to service the remaining elements of the CPRSP when the discrete data input is activated.
+
+The PCU operates in a host of different scenarios during its lifetime from integration through disposal. Following assembly, the PCU completes functional and environmental testing at LaRC.
+
+The PCU is shipped to LASP, where it is functionally tested with the CPRSP subsystems other than the the ExPA (`\TBR{Delivery destination and role of PCU in CPRSP testing}`{=latex}). The 28 VDC output of the PCU is connected to the HISIE and HPS via three buses and connect 120 VDC and discrete data test lines to the PCU's input ports. The PCU provides analog signal and thermistor outputs to enable troubleshooting and monitoring of PCU operations during CPRSP testing at LASP, all other ground testing, and on-orbit operations. The PCU may be used during thermal vacuum chamber testing. 
+
+After completion of the testing at KSC, the PCU remains unpowered until the CPRSP is attached to ELC-1. During installation when the CPRSP is attached to the EOTP, the discrete is not asserted, and the PCU does not draw power from the EOTP. 
+
+Following installation, the PCU power is nominally enabled by ISS controllers performing two actions. The first action is activating the 120 VDC Operational Power bus, allowing that power to flow via the J1 port on the ExPA. The relay's switch is normally open and closes only when the discrete data line is activated. The second action is activating the commanding discrete, at which point the PCU energizes the voltage conversion circuitry to output 28 VDC. 
+
+When either the 120 VDC Operational Power is removed or the discrete data line is deactivated, the PCU ceases outputting 28 VDC power. When science operations are complete or for other scenarios requiring planned deactivation of the PCU, the nominal order of controller operations for de-energizing the PCU is deactivating the commanding discrete, followed by deactivating the 120 VDC Operational Power bus. In the event of an unplanned power outage of the 120 VDC Operational Bus, controllers deactivate the commanding discrete as soon as possible if power had not yet been restored. Both planned and unplanned power outages remove all power to the CPRSP.
+
+# External Interfaces [interfaces] #
+
+## External Interfaces by Function
+
+The PCU maintains external interfaces across the following functions: 
+
+- Structural
+	- ExPA Attachment
+- Power
+	- 28V Power Output
+		- 28 VDC Bus A Power Out
+		- 28 VDC Bus B Power Out
+		- 28 VDC Bus C Power Out
+	- 120V Power Input
+- Data or signal
+	- Analog Signals / Thermistor Output
+		- Thermistor Out x 6
+		- Bus A Current Analog Out
+		- Bus B Current Analog Out
+		- Bus C Current Analog Out
+		- Bus Voltage Analog Out
+- Thermal
+	- ExPA Heat Rejection
+	- Survival Heaters (`\TBR{Pending thermal analysis of whether survival heaters are necessary for PCU}`{=latex})
+	- Adaptor Plate (`\TBR{Pending thermal analysis of whether there is thermal interface with Adaptor Plate}`{=latex})
+- Command
+	- Discrete Enable Input
+
+## External Interface Boundaries
+
+`\autoref{boundaries}`{=latex} shows the boundaries between each of the external interfaces. The External Subsystem identifies the subsystem to which the PCU shares an interface. CPRSP ancillary refers to hardware that is not yet specifically allocated to CPRSP subsystems, generally the wiring harnesses in the context of the PCU. The PCU Items belong to, and will be delivered with the PCU. The External Items belong to the External Subsystem, and the PCU design assumes their presence and availability for connection. LASP Document Number 154920 provides specific pinout information on the interfaces with the CPRSP ancillary external item.
+
+`
+\tablewidth{|+p{2.5in}|^p{1.5in}|^p{0.7in}|^p{1.25in}||}
+`{=latex}
+
+| Interface | External Subsystem | PCU Item | External Item |
+|------------------------------------------|--------------------|------------------|------------------|
+| ExPA Attachment | ExPA | Holes | Fasteners |
+| 28V Power Output (J20) | CPRSP ancillary | PCU Jack | Mating Connector |
+| 120V Power Input (J21) | CPRSP ancillary | PCU Jack | Mating Connector |
+| Analog Signals / Thermistor Output (J22) | CPRSP ancillary | PCU Jack | Mating Connector |
+| Discrete Enable Input (J23) | CPRSP ancillary | PCU Jack | Mating Connector |
+| ExPA Thermal | ExPA | PCU `-Z` surface | ExPA surface |
+| Survival Heaters (TBR) | CPRSP ancillary | PCU surface | Survival Heater |
+| Adaptor Plate Thermal (TBR) | CPRSP ancillary | PCU `+Z` surface | Adaptor Plate |
+[External Interface Boundaries][boundaries]
+
+# Requirements [sec_req] #
+
+`\renewcommand\labelitemi{}`{=latex}
+
+
+This section contains the requirements that define the performance of the PCU, its interface with the other CPRSP subsystems, and the testing of the delivered article.
+ 
+{{pcu_reqs.txt}}
+
+`
+\begin{appendices}
+\cftinserthook{toc}{preapp}
+\chapterstyle{appendix}
+`{=latex}
+
+# Acronyms [sec_acros] #
+
+`\printglossary[type=\acronymtype]`{=latex}
+
+`\end{appendices}`{=latex}

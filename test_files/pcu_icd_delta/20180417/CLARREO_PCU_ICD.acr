@@ -1,0 +1,71 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{C}\relax \glsresetentrylist %
+\glossentry{CLARREO}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{7}}}%
+\glossentry{CPF}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{7}}}%
+\glossentry{CPRSP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{6}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{8\delimR 11}}}\glsgroupskip
+\glsgroupheading{E}\relax \glsresetentrylist %
+\glossentry{EE}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{29}}}%
+\glossentry{ELC}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{12\delimN 13}}}%
+\glossentry{EOTP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{18}}}%
+\glossentry{ExPA}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8\delimR 10}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{14}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{21\delimN 22}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{25}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{30}}}\glsgroupskip
+\glsgroupheading{F}\relax \glsresetentrylist %
+\glossentry{FRAM}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{7}}}\glsgroupskip
+\glsgroupheading{G}\relax \glsresetentrylist %
+\glossentry{GSFC}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{7}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{29}}}\glsgroupskip
+\glsgroupheading{H}\relax \glsresetentrylist %
+\glossentry{HISIE}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{17}}}%
+\glossentry{HPS}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}}}%
+\glossentry{HySICS}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}}}\glsgroupskip
+\glsgroupheading{I}\relax \glsresetentrylist %
+\glossentry{ICD}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{7}}}%
+\glossentry{IDD}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{22}}}%
+\glossentry{ISS}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{14}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{24}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{30\delimN 31}}}\glsgroupskip
+\glsgroupheading{K}\relax \glsresetentrylist %
+\glossentry{KSC}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}}}\glsgroupskip
+\glsgroupheading{L}\relax \glsresetentrylist %
+\glossentry{LaRC}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}}}%
+\glossentry{LASP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{7\delimR 9}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{11}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{15\delimN 16}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{21\delimN 22}}}\glsgroupskip
+\glsgroupheading{P}\relax \glsresetentrylist %
+\glossentry{PCU}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{6\delimR 31}}}\glsgroupskip
+\glsgroupheading{V}\relax \glsresetentrylist %
+\glossentry{VDC}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{6}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{8\delimN 9}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{11\delimR 13}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{15}}}%
+\end{theglossary}\glossarypostamble

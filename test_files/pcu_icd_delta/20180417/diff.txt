@@ -1,0 +1,247 @@
+diff --git a/pcu_icd/pcu_reqs.txt b/pcu_icd/pcu_reqs.txt
+index 1b5da77..9567f9e 100644
+--- a/pcu_icd/pcu_reqs.txt
++++ b/pcu_icd/pcu_reqs.txt
+@@ -3,20 +3,23 @@
+ 
+ **[PCU.10000]** Input 120 VDC  
+ 
+-The PCU shall operate nominally given a steady-state voltage between 106.5 VDC and 126.5 VDC on the Operational Power input in accordance with LASP Document No. 154920.  
++The PCU shall operate nominally given a steady-state voltage between 102 VDC and 126.5 VDC on the Operational Power input in accordance with LASP Document No. 154920.  
+ 
+ - Rationale: *The PCU converts the 120 VDC Operational Power supplied by the ExPA into 28 VDC. Document No. 154920 identifies the pins, part number, manufacturer, and description of the 120V Power Input interface jack and mating connector.  This derives from the ELC 120 VDC Power Interface requirements of section E.3.2.1.1.1 of SSP 57003 Rev L. Figure E.3.2.1.1.2-1 implies that the PCU could see a minimum of 102 VDC.* 
+ 
+-**[PCU.10005]** Exposure to Brownout  
++**[PCU.10005]** Exposure to Undervoltage  
+ 
+-The PCU shall operate nominally after exposure to input voltages from 0 to 120 VDC during brownout.  
++The PCU shall operate nominally after exposure to input voltages from 0 to 102 VDC (TBR).
+ 
+ - Rationale: *The PCU needs to be resilient to times when the ELC may provide less voltage than the advertised nominal value.* 
+-- Comments: **What is the LASP rationale for this requirement? Given the nominal input voltage range of 102V-126.5V, the brownout range cannot be all the way up to 120V. It seems like there should be more specifics to account for a particular condition. How does LASP want LaRC to verify this requirement?**  
++
++- LASP 30APR2018 comment: "The rationale for the requirement derives from engineering best practices, to ensure that the PCU continues to operate after exposure to voltages less than the minimum nominal voltage of 102VDC. Exposure to lower voltage might result in high current draw which could damage or stress components within the PCU. "
++- Notes: "brownout" = undervoltage. 
++- Test by dropping voltage below 102 VDC and ensure everything works when input voltage brought back up.
+ 
+ **[PCU.10010]** Survival Following Unannounced Removal of Power  
+ 
+-The PCU shall survive after exposure to an unplanned removal of power.  
++The PCU shall operate nominally after exposure to after exposure to an unplanned removal of power.  
+ 
+ - Rationale: *The PCU needs to be resilient to times when the ISS removes 120V Operational Power from the ELC prior to notifying the CPOC due to operational constraints.* 
+ 
+@@ -231,7 +234,7 @@ The PCU shall not draw current from the EOTP.
+ 
+ **[PCU.15000]** Downstream Impedance  
+ 
+-The PCU shall output power compatible with the specified load impedance model.  
++The PCU shall output power compatible with the specified load impedance model Agile # TBD.  
+ 
+ - Rationale: *The PCU design accounts for a stable impedance interface between the load and the source across frequencies of interest. Load impedance model is from LTspice model with filename `CPRS_PWR_input_impedance_NO_PCU.asc` delivered by LASP on 21 February 2018.* 
+ - Comments: **Request that LASP place LTspice model under configuration control and provide a reference to which requirement can refer.**  
+@@ -275,6 +278,7 @@ The PCU shall provide a separate return for each differential analog circuit.
+ The PCU shall have a mass less than or equal to 8.77 kg.  
+ 
+ - Rationale: *This value is the 6.9 kg current best estimate as of APR2018 along with a 27% mass growth allowance.* 
++- 15 May 2018: **Run past Tim Holden as the keeper of the MEL.**
+ 
+ **[PCU.16005]** Input Connector Location  
+ 
+@@ -303,23 +307,24 @@ The PCU shall implement external interface connectors in accordance with LASP Do
+ The PCU dimension along the `X`-axis in the ExPA Reference Coordinate System shall be less than 34.00 inches.     
+ 
+ - Rationale: *This is the dimension of the ExPA Payload envelope along the `X`-axis. Reference: D683-97497-01.* 
++- **15 May 2018: Ryan at LASP will redo X-axis allocation that accounts for flexures and mechanical considerations.**
+ 
+ **[PCU.16025]** Dimension in Y axis  
+ 
+ The PCU dimension along the `Y`-axis in the ExPA Reference Coordinate System shall be less than 46.00 inches.   
+ 
+ - Rationale: *This is the dimension of the ExPA Payload envelope along the `Y`-axis. Reference: D683-97497-01.* 
++- **15 May 2018: Ryan at LASP will redo y-axis allocation that accounts for flexures and mechanical considerations.**
+ 
+ **[PCU.16030]** Dimension in Z axis  
+ 
+ The PCU shall be less than 2.3 inches along the `Z`-axis in the ExPA Reference Coordinate System.  
+ 
+ - Rationale: *This is the maximum allowable value provided by LASP on 5 April 2018. Reference: D683-97497-01. This is the most binding spatial/mass requirement on the design.* 
+-- Comments: **Verify with LASP that 2.3 inches accommodates human factors "working volume" to make integration tasks feasible.**  
+ 
+ **[PCU.16100]** Structural Interface  
+ 
+-The PCU shall compy with the ExPA IDD (D683-97497-01) at the structural interface to the ExPA.  
++The PCU shall comply with the ExPA IDD (D683-97497-01) at the structural interface to the ExPA.  
+ 
+ - Rationale: *This IDD applies to all FRAM-based payloads. Section E.3.1.4.2.3 of SSP 57003 Rev L (FRAM Fastener Installation) describes how external payloads are attached to the FRAM and references the ExPA IDD.* 
+ 
+@@ -328,14 +333,13 @@ The PCU shall compy with the ExPA IDD (D683-97497-01) at the structural interfac
+ The PCU shall comply with LASP interface drawing `\TBD{Drawing from LASP showing PCU positioning on ExPA}`{=latex}.  
+ 
+ - Rationale: *This drawing shows how the PCU should be positioned on ExPA to ensure interface compatibility with the rest of the CPRSP.* 
+-- Comments: **Request LASP provide a drawing specifying any positioning constraints for PCU on ExPA.**  
++- Comments: **Not a LaRC requirement; LASP will position.**  
+ 
+ **[PCU.16110]** Threaded Fasteners with Locking Features  
+ 
+ The PCU shall use threaded fasteners that implement locking features.   
+ 
+-- Rationale: *The locking features decreases the risk that threaded fasteners will unseat themselves.* 
+-- Comments: **Clarify rationale with LASP**  
++- Rationale: *The locking features decreases the risk that threaded fasteners will unseat themselves. LASP recommends Nitronic 60 or stainless steel locking helicoils. Derived requirement from GOLD rules flowed to PCU* 
+ 
+ **[PCU.16115]** Covered Holes  
+ 
+@@ -407,19 +411,19 @@ The PCU shall meet structural integrity requirements in an On-Orbit acceleration
+ 
+ **[PCU.16410]** Launch Loads - Axial  
+ 
+-The PCU shall survive axial random vibration loads of  `\TBD{Axial Launch Load Limit}`{=latex}.  
++The PCU shall operate nominally after exposure to axial random vibration loads of  `\TBD{Axial Launch Load Limit}`{=latex}.  
+ 
+ - Rationale: *The PCU will be subjected to significant random vibration loads during launch. Requirement levied by LASP via spreadsheet dated 05MAR2018.* 
+ 
+ **[PCU.16415]** Launch Loads - Lateral  
+ 
+-The PCU shall survive lateral random vibration loads of  `\TBD{Lateral Launch Load Limit}`{=latex}.  
++The PCU shall operate nominally after exposure to lateral random vibration loads of  `\TBD{Lateral Launch Load Limit}`{=latex}.  
+ 
+ - Rationale: *The PCU will be subjected to significant random vibration loads during launch. Requirement levied by LASP via spreadsheet dated 05MAR2018.* 
+ 
+ **[PCU.16420]** Structural Loading  
+ 
+-The PCU shall survive a static load of 60g applied in each of  the X, Y, and Z axes in the ExPA Reference Coordinate System.  
++The PCU shall operate nominally after exposure to a static load of 60g applied in each of  the X, Y, and Z axes in the ExPA Reference Coordinate System.  
+ 
+ - Rationale: *The PCU will be subjected to significant structural loads during launch. Requirement levied by LASP via spreadsheet dated 05MAR2018.  Reference: D683-97497-01. One "g" is equivalent to 9.8 m/s^2.* 
+ 
+@@ -427,22 +431,22 @@ The PCU shall survive a static load of 60g applied in each of  the X, Y, and Z a
+ 
+ The PCU shall have a minimum natural frequency of 250 Hz `\TBR{Minimum Natural Frequency}`{=latex}.  
+ 
+-- Rationale: *Setting a minimum natural frequency above that expected to be encountened prevents the PCU from experiencing induced resonance. Requirement levied by LASP via spreadsheet dated 05MAR2018.* 
+-- Comments: **A typical value is 60Hz. What is the rationale for 250Hz and opposed to 60Hz?**  
++- Rationale: *Standard minimum fundamental frequency for a board and bvox assembly at LASP is 250 Hz to allow separation between strucrural modes and box modes. CPRS has many structural frequencies around 60 Hz.*
+ 
+ **[PCU.16430]** Acoustics  
+ 
+ PCU enclosure components shall have a  "break even" value of 150in^2/lb or less.  
+ 
+ - Rationale: *Requirement levied by LASP via spreadsheet dated 05MAR2018* 
+-- Comments: **Ask LASP to clarify the requirement and provide rationale for the value. Show the units be "lb/in^2" as opposed to "in^2/lb"?**  
++- Comments: **Update IAW Ryan Lewis paper quoted**  
+ 
+ **[PCU.16435]** On-Orbit Loads  
+ 
+ The PCU shall maintain positive structural margins of safety when exposed to the loading induced by plate deformations in bending.   
+ 
+ - Rationale: *LASP original: "PCU shall be designed to maintain positive structural margins of safety when exposed to the loading induced by plate deformations in bending"* 
+-- Comments: **Request clarification and rationale from LASP.**  
++- Comments: **Request clarification and rationale from LASP.**
++- Verification by analysis. Follow up with Ryan Lewis.  
+ 
+ **[PCU.16440]** Pressure Decay Rate during Launch  
+ 
+@@ -463,7 +467,7 @@ The PCU shall maintain positive structural margins of safety when exposed to a p
+ The PCU thermal mass shall be 4475 +/- `\TBD{Tolerance of thermal mass}`{=latex} J/K.  
+ 
+ - Rationale: *CPRSP subsystem designs are based on their equivalent subsystems from TSIS, which interfaced with the EPIC converter. This requirement simplifies the thermal analysis of the CPRSP element interfaces with the PCU. Aref Nammari, Lead EE for CLARREO at LASP, stated in a 24 OCT 2017 e-mail, "We would like the thermal mass of the covert to be the same as EPIC which was about 4475 J/deg C"* 
+-- Comments: **Ask LASP for a reasonable range of thermal mass and a technical rationale.**  
++- Comments: **David Martin, thermal mass from LASP says that we can remove it.**
+ 
+ ## Operational Environment  
+ 
+@@ -473,19 +477,17 @@ The PCU shall contain only items whose expected function life exceeds 14 months.
+ 
+ - Rationale: *The SMRD RS.21040 specifies prime mission opereation period of 1 year following 2 months of commissioning activities.* 
+ 
+-**[PCU.18100]** Allowable Flight Temperature  
++**[PCU.18100]** Flight Operational Allowable Flight Temperature  
+ 
+-The PCU shall operate nominally between the temperatures -30 deg C and +50 deg C, measured at the mounting surface.  
++The PCU shall operate nominally between the temperatures -30 deg C and +50 deg C (`\TBR{Flight Operational Allowable Temperature Range}`{=latex}), measured at the mounting surface.  
+ 
+-- Rationale: *This represented the expected temperature regime on orbit in which the PCU needs to function.* 
+-- Comments: **Ask LASP for the rationale for the -30 to +50 values.**  
++- Rationale: *This represented the expected temperature regime on orbit in which the PCU needs to function. This is the range of temperatures expected to be encountered during operations on the ELC. This imposes an operational constraint on turning on and turning off the PCU.* 
+ 
+ **[PCU.18105]** Non-Operational Survival Temperature  
+ 
+-The PCU shall survive temperatures of -50 deg C to +75 deg C, measured at the mounting surface.  
++The PCU shall operate nominally after exposure to temperatures of -50 deg C to +75 deg C (`\TBR{Non-Operational Survival Temperature Range}`{=latex}), measured at the mounting surface.  
+ 
+-- Rationale: *This represented the expected temperature regime on orbit to which the PCU may be exposed to and subsequently operate when returned to the allowable flight temperature.* 
+-- Comments: **Ask LASP for the rationale for the -50 to +75 values.**  
++- Rationale: *This represented the expected temperature regime on orbit to which the PCU may be exposed to and subsequently operate when returned to the allowable flight temperature defined by PCU.18100. This considers the thermal state of 6 hour unpowered condition during installation activities.*
+ 
+ **[PCU.18110]** Total Ionizing Dose  
+ 
+@@ -539,16 +541,15 @@ The PCU shall meet minimum workmanship test levels specified by Section 2.4.2.5
+ 
+ **[PCU.19005]** Conducted Susceptibility (CS06) Limits  
+ 
+-The PCU shall prevent any malfunction, degradation of performance, or deviation that exceeds tolerances when subjected to test spikes , in accordance with  Figure 3.2.4.2.3-1 of SSP 57003 Rev L, applied to DC power input leads.  
++The PCU shall prevent any malfunction, degradation of performance, or deviation that exceeds tolerances when subjected to test spikes, in accordance with Figure 3.2.4.2.3-1 of SSP 57003 Rev L, applied to DC power input leads.  
+ 
+-- Rationale: *This requirement is to ensure that payload equipment does not experience damage or degraded performance when subjected to transients that may be expected on the power bus. Longer duration transients are covered by power quality requirements. Note: CS06 is applicable to dc power leads of equipment and subsystem powered by 120 Vdc sources, including grounds and returns, which are not grounded internally to the equipment or subsystem. (From SSP 30237, 3.2.2.3)    Note: Both the positive and negative spike will be applied to each lead under test. Each spike will be applied one time per lead instead of multiple spikes over the course of two minutes.  This derives from the Conducted Susceptibility (CS06) Limits requirements in section 3.2.4.2.3 of SSP 57003 Rev L* 
++- Rationale: *This requirement is to ensure that payload equipment does not experience damage or degraded performance when subjected to transients that may be expected on the power bus. Longer duration transients are covered by power quality requirements. Note: CS06 is applicable to dc power leads of equipment and subsystem powered by 120 Vdc sources, including grounds and returns, which are not grounded internally to the equipment or subsystem. (From SSP 30237, 3.2.2.3)    Note: Both the positive and negative spike will be applied to each lead under test. Each spike will be applied one time per lead instead of multiple spikes over the course of two minutes.  This derives from the Conducted Susceptibility (CS06) Limits requirements in section 3.2.4.2.3 of SSP 57003 Rev L.* 
+ 
+-**[PCU.19105]** Shock Hazard - Class H, Static Bond - Class S  
++**[PCU.19105]** Bonding with ExPA  
+ 
+ The PCU shall comply with the coating requirement for mating surfaces, such that the mechanical bonding surface between the PCU and the ExPA is conductive (conversion coated) to MIL-DTL-5541 class 3 Type 1 (SSP 30245 Revision P).  
+ 
+-- Rationale: *nan* 
+-- Comments: **Request LASP clarify requirement and provide rationale.**  
++- Rationale: *Specifies characteristics of the PCU exterior that enables it to conduct directly to ExPA plate. Flowed down from SSP 57003 3.2.4.8.1* 
+ 
+ ## Safety  
+ 
+@@ -557,30 +558,30 @@ The PCU shall comply with the coating requirement for mating surfaces, such that
+ PCU shall incorporate circuit protection devices to protect against damage normally associated with an electrical fault when such a fault could result in damage to the visiting launch vehicle/ISS or present a hazard to the crew by direct of propagated effects  
+ 
+ - Rationale: *Derives from Electrical Systems General section 3.14.1 of SSP 51700.* 
+-- Comments: **Not in AVM. Is this a unique applicable requirement?**  
++- Comments: **DROP. Replace with SSP 57003 3.2.2.A-C**  
+ 
+ **[PCU.19505]** Safety - Circuit Protection 2  
+ 
+ PCU shall incorporate circuit protective devices that comply with SSP 57000, Pressurized Payload Interface Requirements Document (IRD) or ISS approved International Partner equivalent, at the payload power distribution interface with ISS.  
+ 
+ - Rationale: *Derives from Electrical Systems General section 3.14.1 of SSP 51700.* 
+-- Comments: **Not in AVM. Is this a unique applicable requirement?**  
++- Comments: **DROP. Replace with SSP 57003 3.2.2.A-C**  
+ 
+ **[PCU.19509]** Safety - Circuit Protection 3  
+ 
+ The PCU shall incorporate circuit protective devices sized such to preclude steady state currents in excess of those allowed by TM 102179, Selection of Wires and Circuit Protective Devices of Orbiter Vehicle Payload Electrical Circuits are precluded.  
+ 
+ - Rationale: *Derives from Electrical Systems General section 3.14.1 of SSP 51700.* 
+-- Comments: **Not in AVM. Is this a unique applicable requirement?**  
++- Comments: **DROP. Replace with SSP 57003 3.2.2.A-C**  
+ 
+ **[PCU.19510]** Safety - Wire Sizing  
+ 
+ The PCU shall incorporate wire sizes that conform to the requirements of SSP 57000, Pressurized Payload Interface Requirements Document (IRD) or ISS approved International Partner equivalent, at the payload power distribution interface with ISS.  
+ 
+ - Rationale: *Derives from Electrical Systems General section 3.14.1 of SSP 51700.* 
+-- Comments: **Not in AVM. Is this a unique applicable requirement?**  
++- Resolution: **DROP. LASP responsible for harnessing**
+ 
+-## Test  
++## Test  - Move to test plan
+ 
+ **[PCU.20005]** Testing - Random Vibration  
+ 
+@@ -595,3 +596,11 @@ The PCU shall be tested in a thermal vacuum chamber to  `\TBD{Thermal Testing Te
+ 
+ - Rationale: *Requirement levied by LASP via spreadsheet dated 05MAR2018.* 
+ - Comments: **Is this a unique requirement, or a verification requirement linked to PCU.162XX, PCU.181XX, or additional requirements?**  
++
++
++**[PCU.New]**
++
++The PCU will operate following a non-cooperative discrete from ISS.
++
++
++

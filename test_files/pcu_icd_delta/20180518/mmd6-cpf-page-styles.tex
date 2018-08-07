@@ -1,0 +1,28 @@
+% CPF SMRD-specific page styles to enable compile-time modification of revision and footer
+%
+% Define Page Styles
+%
+\pagestyle{fancy}
+\setlength\hoffset{-0.2in}
+\setlength\topmargin{-20pt}
+\setlength\textheight{600pt}
+\setlength\footskip{50pt}
+\renewcommand{\headrulewidth}{0.0pt}
+% Hard-coded title due to mutlicolumn error
+\lhead{\begin{tabular}[b]{|p{3.75in}|p{2.7in}|} \hline Revision:~\revision & Document No:~\documentnumber\\ \hline Release Date:~\releasedate&Page:~\thepage~of~\pageref{LastPage}\\ \hline \multicolumn{2}{|l|}{Title:~Power Converter Unit Interface Control Document}\\ \hline \end{tabular}}
+\chead{}
+% \chead{\mytitle}
+\rhead{}
+\cfoot{\scriptsize The electronic version is the official approved document.\\The requirements are from a CORE database query dated: 18 May 2018.\\Verify this is the correct version before use.}
+
+
+\fancypagestyle{firststyle}
+{
+   \fancyhf{}
+   \fancyfoot[C]{\scriptsize  The electronic version is the official approved document.\\The requirements are from a CORE database query dated: 18 May 2018.\\Verify this is the correct version before use.}
+   \setlength\topmargin{-40pt}
+   \setlength\footskip{-65pt}
+}
+%
+% End Define Page Styles
+%

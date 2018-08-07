@@ -1,0 +1,29 @@
+\cftinsert {prenorm}
+\contentsline {chapter}{\chapternumberline {1}Introduction }{6}{chapter.1}
+\contentsline {section}{\numberline {1.1}Purpose and Scope }{6}{section.1.1}
+\contentsline {section}{\numberline {1.2}Document Organization }{6}{section.1.2}
+\contentsline {chapter}{\chapternumberline {2}Documents }{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Applicable Documents }{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Reference Documents }{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}Document Control }{7}{section.2.3}
+\contentsline {section}{\numberline {2.4}Order of Precedence }{8}{section.2.4}
+\contentsline {chapter}{\chapternumberline {3}Concept of Operations }{9}{chapter.3}
+\contentsline {chapter}{\chapternumberline {4}External Interfaces }{10}{chapter.4}
+\contentsline {section}{\numberline {4.1}External Interfaces by Function}{10}{section.4.1}
+\contentsline {section}{\numberline {4.2}External Interface Boundaries}{10}{section.4.2}
+\contentsline {chapter}{\chapternumberline {5}Requirements }{12}{chapter.5}
+\contentsline {section}{\numberline {5.1}Accepts 120 VDC Input}{12}{section.5.1}
+\contentsline {section}{\numberline {5.2}Accepts Discretes}{14}{section.5.2}
+\contentsline {section}{\numberline {5.3}Outputs 28 VDC}{16}{section.5.3}
+\contentsline {section}{\numberline {5.4}Outputs Analog Signals}{17}{section.5.4}
+\contentsline {section}{\numberline {5.5}Provides Current Protection}{18}{section.5.5}
+\contentsline {section}{\numberline {5.6}Matches Impedance}{20}{section.5.6}
+\contentsline {section}{\numberline {5.7}Isolates DC Power}{20}{section.5.7}
+\contentsline {section}{\numberline {5.8}Structural}{22}{section.5.8}
+\contentsline {section}{\numberline {5.9}External Contamination}{27}{section.5.9}
+\contentsline {section}{\numberline {5.10}Thermal}{28}{section.5.10}
+\contentsline {section}{\numberline {5.11}Operational Environment}{29}{section.5.11}
+\contentsline {section}{\numberline {5.12}Ground Test Environment}{30}{section.5.12}
+\contentsline {section}{\numberline {5.13}EMI/\penalty \exhyphenpenalty EMC}{30}{section.5.13}
+\cftinsert {preapp}
+\contentsline {appendix}{\chapternumberline {A}Acronyms }{32}{chapter.A}

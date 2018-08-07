@@ -1,0 +1,533 @@
+
+## Accepts 120 VDC Input  
+
+**[PCU.10000]** Input 120 VDC  
+
+The PCU shall operate nominally given a steady-state voltage between 102 VDC and 126.5 VDC on the Operational Power input in accordance with LASP Document No. 154920.  
+
+- Rationale: *The PCU converts the 120 VDC Operational Power supplied by the ExPA into 28 VDC. Document No. 154920 identifies the pins, part number, manufacturer, and description of the 120V Power Input interface jack and mating connector.  This derives from the ELC 120 VDC Power Interface requirements of section E.3.2.1.1.1 of SSP 57003 Rev L. Figure E.3.2.1.1.2-1 implies that the PCU could see a minimum of 102 VDC.* 
+
+**[PCU.10005]** Exposure to Undervoltage  
+
+The PCU shall operate nominally after exposure to input voltages from 0 to 102 VDC (`\TBR{Undervoltage range}`{=latex}).  
+
+- Rationale: *The PCU needs to be resilient to times when the ELC may provide less voltage than the advertised nominal value. This derives from engineering best practices to ensure that the PCU continues to operate after exposure to voltages less than the minimum nominal voltage of 102VDC. Exposure to lower voltage might result in high current draw, which could damage or stress components within the PCU.* 
+
+**[PCU.10010]** Survival Following Unannounced Removal of Power  
+
+The PCU shall operate nominally after exposure to an unplanned removal of power.  
+
+- Rationale: *The PCU needs to be resilient to times when the ISS removes 120V Operational Power from the ELC prior to notifying the CPOC due to operational constraints.* 
+
+**[PCU.10015]** Protection from Input Polarity Reversal  
+
+The PCU shall protect itself from damage due to reversed polarity at the PCU 120 VDC input.  
+
+- Rationale: *During integration and test, there is a possibility that technicians may attach the wrong connectors to the 120 VDC inputs, and the PCU design need to accommodate this situation.* 
+
+**[PCU.10020]** 120 VDC Non-Normal Voltage Transients  
+
+The PCU shall operate nominally following exposure to transient voltage conditions as specified by SSP 57003 Rev L Figure E.3.2.1.1.2-1.  
+
+- Rationale: *This requirement protects the ISS in the event of a transient voltage condition. Loads may be exposed to transient overvoltage conditions during operation of the power system's fault protection components.  This derives from the ELC 120 VDC Power Interface requirements of section E.3.2.1.1.2 of SSP 57003 Rev L.* 
+
+**[PCU.10025]** Reverse Current  
+
+The PCU shall limit reverse current transients in accordance with Figures E.3.2.1.1.4-1, E.3.2.1.1.4-2, E.3.2.1.1.4-3 of SSP 57003 Rev L  when exposed to a hard fault across the power source, as specified by section E.3.2.1.1.4 of SSP 57003 Rev L.   
+
+- Rationale: *This requirement prevents current from entering an output and damaging components. For purposes of this interface definition, the fault is 10 milliohms or less applied within 2 micro-seconds or less. For the ELC Payload/payload exhibiting reverse current transient peaks within +/-100 Amperes, the fault resistance is 40 milliohms or less.  This derives from the ELC 120 VDC Power Interface requirements of section E.3.2.1.1.4 of SSP 57003 Rev L.* 
+
+**[PCU.10030]** 120 VDC Operational Power Ripple Voltage and Noise  
+
+The PCU shall operate and be compatible with the EPS time domain ripple voltage and noise level of 2.5 Vrms maximum within the frequency range of 30 Hz to 1 MH when connected to 120 VDC Operational Power.  
+
+- Rationale: *This requirement precludes damage to ExPCA and ORUs. Derives from the ELC 120 VDC Power Interface requirements of section E.3.2.1.1.6.2 of SSP 57003 Rev L.* 
+
+**[PCU.10035]** 120 VDC Operational Power Ripple Voltage Spectrum  
+
+The PCU, connected to ELC 120 VDC output, shall operate and be compatible with the EPS ripple voltage spectrum of a maximum as shown in SSP 57003 Rev L Figure E.3.2.1.1.6.3-1.  
+
+- Rationale: *This requirement precludes damage to ExPCA and ORUs. Note: This limit is 6 decibels (dB) below the Electromagnetic Compatibility (EMC) CS-01, 02 requirement in SSP 30237, Space Station Requirements for Electromagnetic Emission and Susceptibility Requirements, up to 30 MHz.    Derives from the ELC 120 VDC Power Interface requirements of section E.3.2.1.1.6.3 of SSP 57003 Rev L.* 
+
+**[PCU.10040]** 120 VDC Operational Power Surge Current  
+
+The PCU shall limit in-rush current at power input connected to ELC 120 VDC output interface in accordance with Table E.3.2.1.1.6.4-1 of SSP 57003 Rev L.  
+
+- Rationale: *This requirement prevents a hazard due to circuit overload. Derives from the ELC 120 VDC Power Interface requirements of section E.3.2.1.1.6.4 of SSP 57003 Rev L.* 
+
+## Accepts Discretes  
+
+**[PCU.11000]** Input Discrete Power-on Command  
+
+The PCU shall recognize a digital logic zero (VIL) and digital logic one (VIH) for +5 V or +28 V (`\TBR{Voltage of Discrete Input Signals}`{=latex}) logic levels from the ExPCA as defined in Table L.3.7.4.1.1-1, Discrete Output Logic Levels, between the payload input pins.  
+
+- Rationale: *The discrete signal conveys the power on command to the PCU. Document No. 154920 identifies the pins, part number, manufacturer, and description of the Discrete Enable Input interface jack and mating connector.  Derives from Discrete Output Logic Levels (from ExPCA) requirements of section L.3.7.4.1.1 of SSP 57003 Rev L.* 
+
+**[PCU.11005]** Output Power with Discrete Present  
+
+The PCU shall activate its output voltage when the discrete Power-on signal is logic one and when 120 VDC is applied to the PCU input.  
+
+- Rationale: *The PCU output power is normally off and enabled when the discrete signal is present (logic one).* 
+
+**[PCU.11010]** No Output Power without Discrete  
+
+The PCU shall cease outputting power when the discrete Power-on  signal is logic zero.  
+
+- Rationale: *The PCU output power is normally off and only enabled when the discrete signal is present (logic one). This prevents the PCU from drawing a significant load unless the CPRSP is attached to the ELC and commanded on by the CPOC.* 
+
+**[PCU.11015]** Discrete Returns  
+
+The PCU shall provide an individual return for each ISS low level discrete signal.  
+
+- Rationale: *A dedicated return ensures that return currents are routed with supply leads, thus minimizing radiation due to differential mode currents and aids in crosstalk reduction.  Not sharing returns minimizes the chances of common impedance noise coupling. This derives from the Analog, Differential Circuit Return requirement in section 3.2.3.3.2.6 of SSP 57003 Rev L.* 
+
+**[PCU.11020]** Discrete Loading - Capacitance  
+
+The PCU shall prevent the maximum capacitive loading on the ExPA discrete outputs from exceeding 1 microFarad.  
+
+- Rationale: *This requirement ensures that discrete signals (including those used to control a hazard) are received. This derives from the Payload Discrete Loading Requirements  in section L.3.7.4.6.A of SSP 57003 Rev L.* 
+
+**[PCU.11025]** Discrete Loading - Inductance  
+
+The PCU shall prevent the maximum inductive loading the ExPA discrete outputs from exceeding 10mH.  
+
+- Rationale: *This requirement ensures that discrete signals (including those used to control a hazard) are received. This derives from the Payload Discrete Loading Requirements  in section L.3.7.4.6.A of SSP 57003 Rev L.* 
+
+**[PCU.11031]** Discrete Loading - Resistance 28 V  
+
+The PCU shall ensure that the maximum resistive loading on the ExPCA +28V discrete output exceeds 700 Ohm, except for when used for switch closure detection.  
+
+- Rationale: *This requirement ensures that discrete signals (including those used to control a hazard) are received. The ExPCA discrete output voltage span of +28 Vdc +2.6/-4.0 Vdc is not guaranteed when loading exceeds 35mA (current-limiting will occur with FRAM-based Payload loads drawing about 35 mA). This derives from the Payload Discrete Loading Requirements  in section L.3.7.4.6.B of SSP 57003 Rev L.* 
+
+## Outputs 28 VDC  
+
+**[PCU.12000]** Output 28 VDC  
+
+The PCU shall output 28 VDC Power nominal on three power buses in accordance with LASP Document No. 154920.  
+
+- Rationale: *The PCU generates 28 VDC and then splits it into three different nets (busses), which are routed to various sub-systems within the CPRSP.* 
+
+**[PCU.12005]** Minimum Output Voltage  
+
+The PCU shall output electrical power at a voltage greater than or equal to 22 VDC.  
+
+- Rationale: *Aref Nammari, Lead EE for CLARREO at LASP, stated in 24OCT2017 e-mail "CPRS DC-DC converters have a wide input range: 22V to 40V."* 
+
+**[PCU.12010]** Maximum Output Voltage  
+
+The PCU shall output electrical power at a voltage less than or equal to 40 VDC.  
+
+- Rationale: *Aref Nammari, Lead EE for CLARREO at LASP, stated in 24OCT2017 e-mail "CPRS DC-DC converters have a wide input range: 22V to 40V."* 
+
+**[PCU.12015]** Maximum Output Ripple Voltage  
+
+The PCU shall output a DC voltage with a peak-to-peak ripple voltage less than or equal to 400 mV.  
+
+- Rationale: *The EPIC power converter used with the TSIS payload specified 400mVpp output ripple voltage. The HPS controller is a rebuild as is from TSIS TPS ISIE and was successfully tested with the EPIC. The HISIE power board will leverage the HPS controller design and uses the same type of DC-DC converters. The LCCE (cryo-cooler controller) and other subsystems are also verified to operate without fault or degradation of performance when subjected to ripple voltage of 200mVp up to 150kHz (consistent with CS01/CS101 per MIL-STD-461F).* 
+
+**[PCU.12020]** Minimum Output Power  
+
+The PCU shall output electrical power greater than or equal to 10 W (`\TBR{Minimum Output Power}`{=latex}).  
+
+- Rationale: *Verification of this requirement ensures that the PCU remains stable at a low load.* 
+
+## Outputs Analog Signals  
+
+**[PCU.13000]** Output Analog Signals  
+
+The PCU shall output thermistor and analog signals in accordance with LASP Document No. 154920.  
+
+- Rationale: *The PCU transmits engineering data for diagnostic testing via a set of analog lines. Document No. 154920 identifies the pins, part number, manufacturer, and description of the Analog Signals / Thermistor Output interface jack and mating connector.* 
+
+**[PCU.13005]** Transmit Bus A Current Signal  
+
+The PCU shall transmit the Bus A current telemetry via an analog signal.   
+
+- Rationale: *Transmitting the Bus A current to the HISIE enables CPOC monitoring and troubleshooting of the PCU.* 
+
+**[PCU.13010]** Transmit Bus B Current Signal  
+
+The PCU shall transmit the Bus B current telemetry via an analog signal.   
+
+- Rationale: *Transmitting the Bus B current to the HISIE enables CPOC monitoring and troubleshooting of the PCU.* 
+
+**[PCU.13015]** Transmit Bus C Current Signal  
+
+The PCU shall transmit the Bus C current telemetry via an analog signal.   
+
+- Rationale: *Transmitting the Bus C current to the HISIE enables CPOC monitoring and troubleshooting of the PCU.* 
+
+**[PCU.13018]** Transmit Bus Output Voltage Signal  
+
+The PCU shall transmit the bus output voltage telemetry via an analog signal.  
+
+- Rationale: *Transmitting the output voltage to the HISIE enables CPOC monitoring and troubleshooting of the PCU* 
+
+**[PCU.13020]** Thermistor Output  
+
+The PCU shall transmit six internal temperatures to the HISIE using no more than six thermistors.  
+
+- Rationale: *The thermistors provide the HISIE information into PCU internal temperatures, which may constrain certain operations of the PCU.* 
+
+## Provides Current Protection  
+
+**[PCU.14000]** Bus A Maximum Current  
+
+The PCU shall fuse Bus A to 10 amperes (`\TBR{Value of Bus A maximum current}`{=latex}).   
+
+- Rationale: *Calculated from max expected power of 132W at 30V, derated at 50%, and choosing next higher current fuse.* 
+
+**[PCU.14003]** Bus B Maximum Current  
+
+The PCU shall fuse Bus B to 7.5 amperes (`\TBR{Value of Bus B maximum current}`{=latex}).  
+
+- Rationale: *Calculated from max expected power of 107W at 30V, derated at 50%, and choosing next higher current fuse.* 
+
+**[PCU.14006]** Bus C Maximum Current  
+
+The PCU shall fuse Bus C to 15 amperes (`\TBR{Value of Bus C maximum current}`{=latex}).  
+
+- Rationale: *Calculated from max expected power of 168W at 30V, derated at 50%, and choosing next higher current fuse.* 
+
+**[PCU.14010]** Bus A Maximum Output Power  
+
+The PCU shall output electrical power to Bus A with a power less than or equal to 132 W.  
+
+- Rationale: *Bus A powers the HISIE, and the value is provided by Aref Nammari during meeting on 07FEB2018.* 
+
+**[PCU.14013]** Bus B Maximum Output Power  
+
+The PCU shall output electrical power to Bus B with a power less than or equal to 107 W.  
+
+- Rationale: *Bus B powers the HPS, and the value is provided by Aref Nammari during meeting on 07FEB2018.* 
+
+**[PCU.14016]** Bus C Maximum Output Power  
+
+The PCU shall output electrical power to Bus C with a power less than or equal to 168 W.  
+
+- Rationale: *Bus C powers the gimbal motors, and the value is provided by Aref Nammari during meeting on 07FEB2018.* 
+
+**[PCU.14020]** Circuit Protection Trip Coordination  
+
+The PCU shall provide trip coordination such that sub-system over-current protection nearest to the fault will activate prior to over-current protection further upstream.  
+
+- Rationale: *This requirement ensures operability of the CPRSP without tripping upstream protection devices. This derives from the Electrical Power System Circuit Protection Characteristics requirements in section 3.2.2.A of SSP 57003 Rev L.* 
+
+**[PCU.14025]** Circuit Protection for Overcurrent  
+
+The PCU shall provide overcurrent protection at all points where power is distributed to lower level feeder and branch lines as specified by Tables 3.2.2-3, 3.2.2-4, 3.2.2-5, 3.2.2-6, and 3.2.2-7 of  SSP 57003 Rev L.  
+
+- Rationale: *This requirement prevents overload of wiring within the CPRSP. This derives from section 3.2.2.B of SSP 57003 Rev L.* 
+
+**[PCU.14100]** EOTP Current Draw  
+
+The PCU shall not draw current from the EOTP.  
+
+- Rationale: *The EOTH electrical interface is only defined for resistive heater power loads. Non-resistive electrical logs, *e.g.* motors, computers, capacitors, *etc.*, are not supported by the EOTP. Payloads must have inhibits in place for all non-resistive electrical loads such that no power is being drawn from the EOTP power buses when they are energized (SSP 57003, 3.7.3.5.3). ExPA-based Payloads need to be aware that the EOTP Primary Heater Power (120 VDC Bus 1) use the same lines as the ELC operational power lines. Note that the EOTP has no command or telemetry for payloads.* 
+
+## Matches Impedance  
+
+**[PCU.15000]** Downstream Impedance  
+
+The PCU shall output power compatible with the specified load impedance model (Agile # `\TBD{Future LASP Agile document that will specify load impedance model}`{=latex}).  
+
+- Rationale: *The PCU design accounts for a stable impedance interface between the load and the source across frequencies of interest. Load impedance model is from LTspice model with filename `CPRS_PWR_input_impedance_NO_PCU.asc` delivered by LASP on 21 February 2018.* 
+
+## Isolates DC Power  
+
+**[PCU.15100]** Payload Power Isolation  
+
+The PCU shall isolate its DC power  from chassis, structure, equipment conditioned power return/reference, and signal returns by a minimum of 1 MegaOhm.  
+
+- Rationale: *The 120 VDC or 28 VDC source is referenced to structure at its output.  The payload power input must be isolated to prevent ground loops and intentional current flow through structure. This derives from the Payload  Power Isolation requirements in section 3.2.3.3.1 of SSP 57003 Rev L.* 
+- Comments: **Need to resolve this comment from Aref: "CPRS will implement a single point ground where the returns from all subsystems will connect to 28V return which will connect to chassis therefore making chassis the single point ground and this single point ground would be the PCU chassis. The requirement PCU.15100 is not quite consistent with either PCU.15110 or PCU.15115 which allow for returns to be connected to chassis if it is the single point ground."**  
+
+**[PCU.15105]** Single Point Ground  
+
+The PCU shall connect each electrically isolated power source to the structure at no more than one point.  
+
+- Rationale: *A single reference to structure prevents the flow of intentional and noise currents which could have an adverse impact on ISS and other equipment operations. This derives from the Single Point Ground requirement in section 3.2.3.3.2.1 of SSP 57003 Rev L.* 
+
+**[PCU.15110]** Electrical Power Isolation  
+
+The PCU shall isolate each isolated electrical DC power source from chassis, structure, equipment-conditioned power return/reference, and signal circuits by a minimum of 1 MegaOhm, individually, except at the single point ground.  
+
+- Rationale: *A single reference to structure prevents the flow of intentional and noise currents which could have an adverse impact on ISS and other equipment operations. This derives from the Electrical Power Isolation requirements in section 3.2.3.3.2.2 of SSP 57003 Rev L.* 
+
+**[PCU.15115]** Signal Circuit Return Grounding  
+
+The PCU shall DC isolate circuit conductors from chassis, structure, and equipment conditioned power return/reference, by a minimum of 1 MegaOhm, individually, when not terminated by the signal circuit's single point ground/reference.  
+
+- Rationale: *A single reference to structure prevents the flow of intentional and noise currents which could have an adverse impact on ISS and other equipment operations. Balanced, differential circuits isolated from chassis, structure, and user conditioned power return/reference by a minimum of 6000 ohms complies with this requirement.    Note: Signals circuits with frequency components equal to or above four megahertz may use controlled impedance transmission and reception media such as (but not limited to): 1) shielded twisted 72 ohm cable; 2) "twin ax" cable balanced and referenced to primary structure at a single point; 3) "triax" cable using the center and inner shield conductors for unbalanced transmission, referenced to primary structure at a single point with the outer shield multipoint grounded as an "overshield"; or 4) "coax" cable with the shield terminated 360 degrees at each end and at available intermediate point (permitted for signals with the lowest frequency component equal to or above 4 MHz).    This derives from the Signal Circuit Returning Grounding requirement in section 3.2.3.3.2.3 of SSP 57003 Rev L.* 
+
+**[PCU.15120]** Analog, Differential Circuit Return  
+
+The PCU shall provide a separate return for each differential analog circuit.  
+
+- Rationale: *A dedicated return ensures that return currents are routed with supply leads, thus minimizing radiation due to differential mode currents and aids in crosstalk reduction.  Not sharing returns minimizes the chances of common impedance noise coupling. This derives from the Analog, Differential Circuit Return requirement in section 3.2.3.3.2.5 of SSP 57003 Rev L.* 
+
+## Structural  
+
+**[PCU.16000]** Mass Limit  
+
+The PCU shall have a mass less than or equal to 8.77 kg (`\TBR{PCU mass value}`{=latex}).  
+
+- Rationale: *This value is the 6.9 kg current best estimate as of APR2018 along with a 27% mass growth allowance.* 
+- Comments: **15MAY18: Awaiting approval by Tim Holden.**  
+
+**[PCU.16005]** Input Connector Location  
+
+The PCU shall have input connectors along its `-Y` face in the  ExPA Reference Coordinate System.  
+
+- Rationale: *This is an interpretation of a drawing that Aref Nammari, Lead EE for CLARREO at LASP, sent in 24OCT2017 e-mail. Reference: D683-97497-01.* 
+
+**[PCU.16010]** Output Connector Location  
+
+The PCU shall have output connectors along its `-X` face in the ExPA Reference Coordinate System.  
+
+- Rationale: *This is an interpretation of a drawing that Aref Nammari, Lead EE for CLARREO at LASP, sent in 24OCT2017 e-mail. Reference: D683-97497-01 Revision E.* 
+
+**[PCU.16015]** Connector Types  
+
+The PCU shall implement external interface connectors in accordance with LASP Document Number 154920 "PCU Electrical Interface Control Document."  
+
+- Rationale: *LASP's PCU ICD specifies the PCU connectors as follows:* 
+
+
+{{connector_table.txt}}
+
+
+**[PCU.16020]** Dimension in X axis  
+
+The PCU dimension along the `X`-axis in the ExPA Reference Coordinate System shall be less than 34.00 inches (`\TBR{PCU dimension allocation along X-axis}`{=latex}).  
+
+- Rationale: *This is the dimension of the ExPA Payload envelope along the `X`-axis. Reference: D683-97497-01.* 
+- Comments: **15MAY2018: Ryan Lewis will redo X-axis allocation that accounts for flexures and mechanical considerations.**  
+
+**[PCU.16025]** Dimension in Y axis  
+
+The PCU dimension along the `Y`-axis in the ExPA Reference Coordinate System shall be less than 46.00 inches  (`\TBR{PCU dimension allocation along Y-axis}`{=latex}).   
+
+- Rationale: *This is the dimension of the ExPA Payload envelope along the `Y`-axis. Reference: D683-97497-01.* 
+- Comments: **15MAY2018: Ryan Lewis will redo Y-axis allocation that accounts for flexures and mechanical considerations.**  
+
+**[PCU.16030]** Dimension in Z axis  
+
+The PCU shall be less than 2.3 inches along the `Z`-axis in the ExPA Reference Coordinate System.  
+
+- Rationale: *This is the maximum allowable value provided by LASP on 5 April 2018. Reference: D683-97497-01. This is the most binding spatial/mass requirement on the design.* 
+
+**[PCU.16100]** Structural Interface  
+
+The PCU shall comply with the ExPA IDD (D683-97497-01) at the structural interface to the ExPA.  
+
+- Rationale: *This IDD applies to all FRAM-based payloads. Section E.3.1.4.2.3 of SSP 57003 Rev L (FRAM Fastener Installation) describes how external payloads are attached to the FRAM and references the ExPA IDD.* 
+
+**[PCU.16110]** Threaded Fasteners with Locking Features  
+
+The PCU shall use threaded fasteners that implement locking features.   
+
+- Rationale: *The locking features decreases the risk that threaded fasteners will unseat themselves. LASP recommends Nitronic 60 or stainless steel locking helicoils. This derives from a GOLD rule 4.20 (Fastener Locking) that flows down to the PCU.* 
+
+**[PCU.16115]** Covered Holes  
+
+The PCU shall incorporate covers on all round or slotted holes in the range of 0.5 inch to 1.4 inch.  
+
+- Rationale: *This requirement prevents EVA crew entrapment or injury. This derives from an EVA Human Engineering Safety requirement in section 3.8.3.2 of SSP 57003 Rev L.* 
+
+**[PCU.16120]** Burrs  
+
+The PCU shall have exposed surfaces free from burrs.  
+
+- Rationale: *This requirement protects EVA crew from injury due to burrs. This derives from an EVA Human Engineering Safety requirement in section 3.8.3.4 of SSP 57003 Rev L.* 
+
+**[PCU.16125]** Sharp Edges and Protrusion Criteria  
+
+The PCU shall meet sharp edge and protrusion criteria specified by Figure 3.8.3.7-1 and Tables 3.8.3.7-1 and 3.8.3.7-2 from SSP 57003.  
+
+- Rationale: *This requirement protects crew from injury due to sharp edges. This derives from the Sharp Edges and Protrusion Criteria requirement in section 3.8.3.7 of SSP 57003 Rev L.* 
+
+**[PCU.16130]** Component Hazardous Energy Provision  
+
+The PCU shall prevent a crewmember from releasing any hazardous energy potential.  
+
+- Rationale: *This requirement protects EVA crew from injury due to hazardous energy. This derives from an EVA Human Engineering Safety requirement in section 3.8.3.9 of SSP 57003 Rev L.* 
+
+**[PCU.16135]** EVA Induced Loads  
+
+The PCU shall maintain positive margins of safety for any components exposed to EVA crew loads as defined in Table 3.1.3-1 of SSP 57003 Rev L.  
+
+- Rationale: *CPRSP hardware structure must be designed to withstand on-orbit crew loads and to prevent structural failure of the payload, which could pose a risk to the ISS or crew. Derives from Extravehicular Activity On-Orbit Induced Loads requirements of section 3.1.3 of SSP 57003 Rev L.* 
+
+**[PCU.16140]** Acceleration Environment  
+
+The PCU shall meet structural integrity requirements in an On-Orbit acceleration environment having peak transient accelerations of up to 0.4 g, a vector quantity acting in any direction.  
+
+- Rationale: *This criterion is to be used to assess the effects of the impact during payload installation. This acceleration is not intended to be used to calculate interface loads. One "g" is equivalent to 9.8 m/s^2.  Derives from Acceleration Environment requirements of section 3.5.9B of SSP 57003 Rev L.* 
+
+**[PCU.16145]** Launch Loads - Axial  
+
+The PCU shall operate nominally after exposure to axial random vibration loads of  `\TBD{Axial Launch Load Limit}`{=latex}.  
+
+- Rationale: *The PCU will be subjected to significant random vibration loads during launch. Requirement levied by LASP via spreadsheet dated 05MAR2018.* 
+
+**[PCU.16150]** Launch Loads - Lateral  
+
+The PCU shall operate nominally after exposure to lateral random vibration loads of  `\TBD{Lateral Launch Load Limit}`{=latex}.  
+
+- Rationale: *The PCU will be subjected to significant random vibration loads during launch. Requirement levied by LASP via spreadsheet dated 05MAR2018.* 
+
+**[PCU.16155]** Structural Loading  
+
+The PCU shall operate nominally after exposure to a static load of 60g applied in each of the X, Y, and Z axes in the ExPA Reference Coordinate System.  
+
+- Rationale: *The PCU will be subjected to significant structural loads during launch. Requirement levied by LASP via spreadsheet dated 05MAR2018.  Reference: D683-97497-01. One "g" is equivalent to 9.8 m/s^2.* 
+
+**[PCU.16160]** Minimum Natural Frequency  
+
+The PCU shall have a minimum natural frequency of 250 Hz (`\TBR{Minimum Natural Frequency}`{=latex}).  
+
+- Rationale: *The standard minimum fundamental frequency for a board and box assembly at LASP is 250 Hz to allow separation betweeen structural modes and box modes. The CPRSP has many structural frequencies around 60 Hz.* 
+
+**[PCU.16165]** Acoustics  
+
+PCU enclosure components shall have a "break even" area/mass ratio  of 150in^2/lb or less, as defined by  Forgrave, Man, and Newell (1999).  
+
+- Rationale: *The "break even" area/mass ratio represents the regime in which both acoustic and random vibration tests induce equal stochastic acceleration responses. Refer to: Forgrave, J.C. & Man, K.F. & Newell, J.M.. (1999). Spacecraft acoustic and random vibration test optimization. 33. 28-31.* 
+
+**[PCU.16170]** On-Orbit Loads  
+
+The PCU shall maintain positive structural margins of safety when exposed to the loading induced by plate deformations in bending.   
+
+- Rationale: *nan* 
+- Comments: **Request clarification and rationale from Ryan Lewis at LASP.**  
+
+**[PCU.16175]** Pressure Decay Rate during Launch  
+
+The PCU shall maintain positive structural margins of safety when exposed to a pressure decay rate of 0.4 lb/in^2 per second.  
+
+- Rationale: *The PCU needs to maintain structural integrity in an environment of decreasing of local atmospheric pressure during launch. This decay rate is comprehensive and envelopes low and high fill factors. This is derived from requirement SPX-FRAM-030-REQ from section 2.5.9 of the Dragon FRAM Payloads Interface Requirements Document (SPX-0003603, version 3.0)* 
+
+**[PCU.16180]** Pressure Decay Rate during Launch Transonic Regime  
+
+The PCU shall maintain positive structural margins of safety when exposed to a pressure decay rate of 1.0  lb/in^2 per second for a duration of 7.0 seconds.  
+
+- Rationale: *The PCU needs to maintain structural integrity in an environment of decreasing of local atmospheric pressure during launch. This decay rate is comprehensive and envelopes low and high fill factors. This is derived from requirement SPX-FRAM-030-REQ from section 2.5.9 of the Dragon FRAM Payloads Interface Requirements Document (SPX-0003603, version 3.0)* 
+
+**[PCU.16185]** Structural Analysis/Design Factors of Safety  
+
+The PCU shall comply with the structural analysis and design factors of safety, as defined in GSFC-STD-7000A.  
+
+- Rationale: *GSFC-STD-7000A contains environmental verification standards for space flight hardware.* 
+
+## External Contamination  
+
+**[PCU.16205]** Molecular Deposition onto Other Payloads  
+
+The PCU shall limit cumulative contaminant deposit on other Payloads, using the nominal operating temperature of the contamination source materials (emitters) and nominal operating temperatures of other Attached Payloads (receivers), to less than `\TBD{Molecular Deposition onto Other Payloads Limit}`{=latex} g/cm^2/s.   
+
+- Rationale: *This requirement prevents molecular deposition on ISS and other payloads. Derives from External Contamination Requirements of section 3.5.3.2.A of SSP 57003 Rev L.* 
+
+**[PCU.16210]** Molecular Deposition onto ISS Elements  
+
+The PCU shall limit cumulative contaminant deposit on ISS elements, using the nominal operating temperature of the contamination source materials (emitters) and nominal operating temperatures of other Payloads (receivers), to less than  `\TBD{Molecular Deposition onto Other ISS Elements Limit}`{=latex} g/cm^2/s.  
+
+- Rationale: *This requirement prevents molecular deposition on ISS and other payloads. Derives from External Contamination Requirements of section 3.5.3.2.B of SSP 57003 Rev L.* 
+
+**[PCU.16215]** Particulates  
+
+The PCU shall limit any activate venting release of particulates to less than 100 microns in size.  
+
+- Rationale: *This requirement protects the external environment. Derives from External Contamination Requirements of section 3.5.3.3 of SSP 57003 Rev L.* 
+
+**[PCU.16220]** Visible Clean-Sensitive  
+
+The PCU shall have visibly clean external surfaces at an incident light level of at least 50 foot-candles and at a distance of 2 to 4 feet.  
+
+- Rationale: *This requirement reduces the amount of contamination that the PCU might induce in the rest of the CPRSP, launch vehicle, or ISS environments. This derives from the Cleanliness requirement in section 3.6.2 of SSP 57003 Rev L.* 
+
+**[PCU.16225]** Structural Materials Criteria and Selection  
+
+The PCU shall incorporate structural materials in accordance with Section 5.4.1 of SSP 52005.  
+
+- Rationale: *SSP 52005 is the Payload Flight Equipment Requirements and Guidelines for Safety-Critical Structures.* 
+
+## Thermal  
+
+**[PCU.17100]** Flight Operational Allowable Flight Temperature  
+
+The PCU shall operate nominally between the temperatures -30 deg C and +50 deg C (`\TBR{Flight Operational Allowable Temperature Range}`{=latex}), measured at the mounting surface.  
+
+- Rationale: *This represented the expected temperature regime on orbit in which the PCU needs to function. This is the range of temperatures expected to be encountered during operations on the ELC. This imposes an operational constraint on turning on and turning off the PCU.* 
+
+**[PCU.17105]** Non-Operational Survival Temperature  
+
+The PCU shall operate nominally after exposure to temperatures of -50 deg C to +75 deg C (`\TBR{Non-Operational Survival Temperature Range}`{=latex}), measured at the mounting surface.  
+
+- Rationale: *This represents the expected temperature regime on orbit to which the PCU may be exposed to and subsequently operate when returned to the allowable flight temperature defined by PCU.17100. This considers the thermal state of 6 hour unpowered condition during installation activities.* 
+
+## Operational Environment  
+
+**[PCU.18005]** Functional Lifetime of Parts  
+
+The PCU shall contain only items whose expected function life exceeds 14 months.  
+
+- Rationale: *The SMRD RS.21040 specifies prime mission opereation period of 1 year following 2 months of commissioning activities.* 
+
+**[PCU.18110]** Total Ionizing Dose  
+
+The PCU shall operate nominally while exposed to the total ionizing dose levels as specified by SSP 30512.  
+
+- Rationale: *The design of the PCU needs to account for the expected radiation in its operational environment, which could threaten its operations.* 
+
+**[PCU.18115]** Trapped Electron Exposure  
+
+The PCU shall operate nominally while exposed to the trappeed electron flux levels as specified by SSP 30512.  
+
+- Rationale: *The design of the PCU needs to account for the expected radiation in its operational environment, which could threaten its operations.* 
+
+**[PCU.18120]** Trapped Proton Exposure  
+
+The PCU shall operate nominally while exposed to the trappeed proton flux levels as specified by SSP 30512.  
+
+- Rationale: *The design of the PCU needs to account for the expected radiation in its operational environment, which could threaten its operations.* 
+
+**[PCU.18125]** Single Event Upset  
+
+The PCU shall operate nominally without sustaining permanent damage following exposure to single event upsets as specified by SSP 30512.  
+
+- Rationale: *The design of the PCU needs to account for the expected radiation in its operational environment, which could threaten its operations.* 
+
+**[PCU.18130]** Single Event Latchup  
+
+The PCU shall operate nominally without sustaining  damage following exposure to single event latchup events as specified by SSP 30512.  
+
+- Rationale: *The design of the PCU needs to account for the expected radiation in its operational environment, which could threaten its operations.* 
+
+**[PCU.18135]** Material Breakdown Voltages  
+
+The PCU shall incorporate materials, including surface coatings, with breakdown voltages in excess of +20/-80 volts on all components directly exposed to the plasma environment.  
+
+- Rationale: *This requirement protects the ISS and EVA crewmembers from electrostatic discharges and prevents arcing. This derives from Plasma requirements of section 3.5.4.1A of SSP 57003 Rev L.* 
+
+## Ground Test Environment  
+
+**[PCU.18150]** Relative Humidity during Ground Test  
+
+The PCU shall operate nominally following exposure to 30-60% (`\TBR{Ground Operation Relative Humidity}`{=latex}) relative humidity during ground testing.  
+
+- Rationale: *This specifies the expected relative humidity during ground testing, which the PCU is not expected to encounter during on-orbit operations.* 
+
+## EMI/EMC  
+
+**[PCU.19005]** Conducted Susceptibility (CS06) Limits  
+
+The PCU shall prevent any malfunction, degradation of performance, or deviation that exceeds tolerances when subjected to test spikes, in accordance with Figure 3.2.4.2.3-1 of SSP 57003 Rev L, applied to DC power input leads.  
+
+- Rationale: *This requirement is to ensure that payload equipment does not experience damage or degraded performance when subjected to transients that may be expected on the power bus. Longer duration transients are covered by power quality requirements. Note: CS06 is applicable to dc power leads of equipment and subsystem powered by 120 Vdc sources, including grounds and returns, which are not grounded internally to the equipment or subsystem. (From SSP 30237, 3.2.2.3)    Note: Both the positive and negative spike will be applied to each lead under test. Each spike will be applied one time per lead instead of multiple spikes over the course of two minutes.  This derives from the Conducted Susceptibility (CS06) Limits requirements in section 3.2.4.2.3 of SSP 57003 Rev L.* 
+
+**[PCU.19105]** Bonding with ExPA  
+
+The PCU shall have a low resistance bond of less than 0.1 ohm to the ExPA.  
+
+- Rationale: *This specifies the Class H bond characteristics that enable the PCU exterior to conduct directly to ExPA plate. Flowed down from SSP 57003 3.2.4.8.1 (Shock Hazard  --- Class H).* 

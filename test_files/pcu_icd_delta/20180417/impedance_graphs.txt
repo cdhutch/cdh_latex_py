@@ -1,0 +1,14 @@
+`\autoref{impedance_circuit.png}`{=latex} simulates the HPS controller, HISIE, HFSS, and HPS motor connected to the PCU.  
+
+![Impedance Simulator Schematic][impedance_circuit.png]
+
+`\FloatBarrier`{=latex}
+
+`\autoref{impedance_graph.png}`{=latex} is the impedance of the load as seen by the power source. The solid line is the impedance magnitude, and the dashed line is the phase.
+
+![Impedance of Load Magnitude and Phase][impedance_graph.png]
+
+`\FloatBarrier`{=latex}
+
+[impedance_circuit.png]: impedance_circuit.png width="5.5in"
+[impedance_graph.png]: impedance_graph.png width="5.5in"
