@@ -43,7 +43,7 @@ def find_expand(path_to_tds, path_to_texfile, f_write, re_input, cwd):
             f_write.write('% ***End: ' + input_code + '\n')
             continue
         f_write.write(line)
-        print(line)
+        # print(line)
     f_read.close()
 
 
@@ -67,6 +67,9 @@ def expand(argv):
                     path_to_texfile + '_expanded_backup.tex')
     return (path_to_texfile + '_expanded.tex')
 
+def main(argv):
+    return expand(argv)
+    # return argv
 
 if __name__ == '__main__':
-    expand(sys.argv)
+    main(sys.argv)

@@ -55,9 +55,9 @@ def compile_diff(diff_tex):
         subprocess.run(
             ['xelatex', '-interaction=batchmode', diff_tex])
 
-if __name__ == '__main__':
+def main(argv):
     # get filesnames of old and new file
-    old_path, new_path, temp_path = get_filepaths(sys.argv)
+    old_path, new_path, temp_path = get_filepaths(argv)
     # expands tex files to temporary directory
     l_expand_tex = populate_temp_dir(old_path, new_path, temp_path)
     # run latexdiff
@@ -65,3 +65,15 @@ if __name__ == '__main__':
     # compile results
     compile_diff(diff_tex)
     print('Run complete')
+
+if __name__ == '__main__':
+    main(sys.argv)
+    # # get filesnames of old and new file
+    # old_path, new_path, temp_path = get_filepaths(sys.argv)
+    # # expands tex files to temporary directory
+    # l_expand_tex = populate_temp_dir(old_path, new_path, temp_path)
+    # # run latexdiff
+    # diff_tex = run_latexdiff(l_expand_tex, temp_path)
+    # # compile results
+    # compile_diff(diff_tex)
+    # print('Run complete')
