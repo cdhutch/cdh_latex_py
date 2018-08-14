@@ -160,12 +160,15 @@ class TeX(object):
                 for glossary in l_glossary:
                     if glossary in line:
                         print('I found ' + glossary)
+                        line = line.split(glossary)[0] + r'\gls{' + glossary + '}' + line.split(glossary)[1]
                         l_glossary.remove(glossary)
+                        print(line)
             else:
                 print('I added ' + m.group(1))
                 l_glossary += [m.group(1)]
                 print(l_glossary)
             f_write.write(line)
+            # print(line)
             prev_line = line
             m = None
         print('Writing out: ' + self.tex_full_path)
