@@ -99,6 +99,9 @@ class TeX(object):
     def pass1(self, thicklines=False):
         re_tbx = re.compile(r'\\Q?TB([RD])\{([^\}]*)\}')
         re_qtbx = re.compile(r'\\QTB[RD]')
+        re_glossary = re.compile(
+            r'\\longnewglossaryentry{(\w+([-\s]+\w+)+)}')
+        l_glossary = []
         fpath_fname_old = self.tex_full_path + '.old'
         subprocess.run(["mv", self.tex_full_path, fpath_fname_old])
         print('Reading in: ' + fpath_fname_old)
@@ -110,6 +113,7 @@ class TeX(object):
         next_line_table_header = False
         tbx_num = 1
         tbx_table_body = ''
+        prev_line = ''
         for line in f_read:
             # Bold face first line of table
             if next_line_table_header is True:
@@ -150,8 +154,22 @@ class TeX(object):
                     tbx_num_label + '}  \\\\ \n \\hline \n'
                 tbx_num += 1
                 m = re.search(re_tbx, line)
+            # Build multi word glossary list
+            m = re.search(re_glossary, line)
+            if m is None:
+                for glossary in l_glossary:
+                    if glossary in line:
+                        print('I found ' + glossary)
+                        l_glossary.remove(glossary)
+            else:
+                print('I added ' + m.group(1))
+                l_glossary += [m.group(1)]
+                print(l_glossary)
             f_write.write(line)
+            prev_line = line
+            m = None
         print('Writing out: ' + self.tex_full_path)
+        print(l_glossary)
         f_write.close()
         return tbx_table_body
 
