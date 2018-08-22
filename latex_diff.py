@@ -11,6 +11,7 @@ import expand_tex
 import shutil
 import subprocess
 
+
 def get_filepaths(args):
     if len(args) != 4:
         error_string = "latex_diff requires exactly 3 argumets\n"
@@ -23,8 +24,9 @@ def get_filepaths(args):
     return old_path, new_path, temp_path
 
 
-def populate_temp_dir(old_path, new_path, temp_path):
-    shutil.rmtree(temp_path, ignore_errors=True)
+def populate_temp_dir(old_path, new_path, temp_path, preserve_diff):
+    if preserve_diff is False:
+        shutil.rmtree(temp_path, ignore_errors=True)
     shutil.copytree(os.path.dirname(new_path), temp_path)
     l_expand_tex = []
     for label, path in [('old', old_path), ('new', new_path)]:
@@ -36,13 +38,17 @@ def populate_temp_dir(old_path, new_path, temp_path):
     return l_expand_tex
 
 
-def run_latexdiff(l_expand_tex, temp_path):
+def run_latexdiff(l_expand_tex, temp_path, hash_from, hash_to, flavor):
+    hashtext = '_' + hash_from + '-' + hash_to
+    if hashtext == '_-':
+        hashtext = ''
+    fname_diff = l_expand_tex[0].split('.')[0] + '_diff' + hashtext + '.tex'
     cmd = 'latexdiff '
     cmd += os.path.join(temp_path, l_expand_tex[0])
     cmd += ' '
     cmd += os.path.join(temp_path, l_expand_tex[1])
     cmd += ' > '
-    diff_tex = os.path.join(temp_path, 'diff.tex')
+    diff_tex = os.path.join(temp_path, (fname_diff))
     cmd += diff_tex
     p = subprocess.Popen(cmd, shell=True)
     os.waitpid(p.pid, 0)
@@ -55,16 +61,19 @@ def compile_diff(diff_tex):
         subprocess.run(
             ['xelatex', '-interaction=batchmode', diff_tex])
 
-def main(argv):
+
+def main(argv, hash_from='', hash_to='', flavor='', preserve_diff=False):
     # get filesnames of old and new file
     old_path, new_path, temp_path = get_filepaths(argv)
     # expands tex files to temporary directory
-    l_expand_tex = populate_temp_dir(old_path, new_path, temp_path)
+    l_expand_tex = populate_temp_dir(old_path, new_path, temp_path, preserve_diff)
     # run latexdiff
-    diff_tex = run_latexdiff(l_expand_tex, temp_path)
+    diff_tex = run_latexdiff(
+        l_expand_tex, temp_path, hash_from, hash_to, flavor)
     # compile results
     compile_diff(diff_tex)
     print('Run complete')
+
 
 if __name__ == '__main__':
     main(sys.argv)
