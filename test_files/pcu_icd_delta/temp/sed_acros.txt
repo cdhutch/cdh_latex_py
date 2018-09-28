@@ -1,3 +1,0 @@
-# Full document text replacements using sed
-# s/}\[VNIR\]{/}{VNIR}{/
-s/\\newacro{([[:print:]]*)}\[([[:print:]]*)\]{/\\newacronym{\1}{\2}{/
