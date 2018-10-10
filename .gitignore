@@ -1,9 +1,10 @@
 *.cpython-36.pyc
 *.pyc
-*.iml
-*.xml
+**.iml
+**.xml
 */compile_tex.cpython-36.pyc
 __pycache__/compile_tex.cpython-36.pyc
 .DS_Store
-*.idea/*.iml
-*.idea/*.xml
+**.idea/**.iml
+*.idea/**.xml
+.idea/**
