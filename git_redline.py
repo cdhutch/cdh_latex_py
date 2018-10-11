@@ -55,7 +55,10 @@ class Repo(object):
             md_full_path)[0] + flavor + '.tex'
         print(os.getcwd())
         build_cmd = ['python', self.build_py,
-                     self.fname_md, self.fname_csv, self.repo_path]
+                     # self.fname_md, self.fname_csv, self.repo_path]
+                     # self.fname_md, self.repo_path]
+                     ]
+        build_cmd = list(filter(None, build_cmd))
         print('----')
         print(build_cmd)
         print('----')
@@ -119,10 +122,10 @@ def parse_prefs_file(path_to_redline_prefs):
         raise ValueError('Need a subdir field in ' + path_to_redline_prefs)
     if build_py is None:
         raise ValueError('Need a build_py field in ' + path_to_redline_prefs)
-    if fname_md is None:
-        raise ValueError('Need a fname_md field in ' + path_to_redline_prefs)
-    if fname_csv is None:
-        raise ValueError('Need a fname_csv field in ' + path_to_redline_prefs)
+    # if fname_md is None:
+    #     raise ValueError('Need a fname_md field in ' + path_to_redline_prefs)
+    # if fname_csv is None:
+    #     raise ValueError('Need a fname_csv field in ' + path_to_redline_prefs)
     return (url, subdir, build_py, fname_md, fname_csv, l_flavors)
 
 
