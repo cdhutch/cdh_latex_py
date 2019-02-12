@@ -134,7 +134,7 @@ class Repo(object):
             os.chdir(self.redline_prefs.repo_subdir)
             str_cmd += self.redline_prefs.repo_subdir
         else:
-            os.chdir(os.path.join(self.redline_prefs.repo_path,
+            os.chdir(os.path.join(self.repo_path,
                                   self.redline_prefs.subdir))
             str_cmd += self.redline_prefs.subdir
         print(str_cmd)
