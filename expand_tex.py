@@ -25,16 +25,13 @@ def find_expand(path_to_tds, path_to_texfile, f_write, re_input, cwd):
     for line in f_read:
         m = re.match(re_input, line)
         if m is not None:
-            input_code = re.sub(re_input, r'\1', line)[:-1]
+            input_code = re.sub(re_input, r'\1', line)
             f_write.write('% ' + line)
             f_write.write('% ***Begin: ' + input_code + '\n')
             try:
                 tree_dir, input_fname = file_seek(
                     path_to_tds, input_code + '.tex')
             except TypeError:
-                # print('TypeError')
-                # print(cwd)
-                # print(input_code + '.tex')
                 tree_dir, input_fname = file_seek(cwd, input_code + '.tex')
             input_fname_fullpath = os.path.join(tree_dir, input_fname)
             print(input_fname_fullpath)
@@ -43,7 +40,6 @@ def find_expand(path_to_tds, path_to_texfile, f_write, re_input, cwd):
             f_write.write('% ***End: ' + input_code + '\n')
             continue
         f_write.write(line)
-        # print(line)
     f_read.close()
 
 
@@ -58,9 +54,8 @@ def expand(argv):
     if len(argv) == 3:
         path_to_tds = argv[2]
     path_to_tds = os.path.expanduser(path_to_tds)
-    # print(path_to_tds, path_to_texfile)
     f_write = open(path_to_texfile + '_expanded.tex', 'w')
-    re_input = re.compile(r'^\\input{([-a-zA-Z_.0-9]+)}$')
+    re_input = re.compile(r'^\\input{([-a-zA-Z_.0-9]+)}\n?$')
     find_expand(path_to_tds, path_to_texfile, f_write, re_input, cwd)
     f_write.close()
     shutil.copyfile(path_to_texfile + '_expanded.tex',
@@ -69,7 +64,6 @@ def expand(argv):
 
 def main(argv):
     return expand(argv)
-    # return argv
 
 if __name__ == '__main__':
     main(sys.argv)
