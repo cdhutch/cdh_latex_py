@@ -134,23 +134,23 @@ class TeX(object):
                 next_line_table_header = True
             # Replace toprule, bottomrule, midrule with hline
             # to allow vertical lines in tables
-            line = re.sub(r'\\toprule', '\hline', line)
-            line = re.sub(r'\\bottomrule', '\hline', line)
-            line = re.sub(r'\\midrule', '\hline', line)
+            line = re.sub(r'\\toprule', r'\\hline', line)
+            line = re.sub(r'\\bottomrule', r'\\hline', line)
+            line = re.sub(r'\\midrule', r'\\hline', line)
             # Seek TBR/TBD codes
             m = re.search(re_tbx, line)
             while m is not None:
                 tbx_num_label = 'tbx_' + '{:d}'.format(tbx_num)
                 mm = re.search(re_qtbx, line)
                 if mm is not None:
-                    tbx_label = '\label{' + tbx_num_label + '}'
+                    tbx_label = r'\\label{' + tbx_num_label + '}'
                 else:
-                    tbx_label = 'TB' + m.group(1) + '\label{' + tbx_num_label + '}'
+                    tbx_label = 'TB' + m.group(1) + r'\\label{' + tbx_num_label + '}'
                 line_new = re.sub(re_tbx, tbx_label, line)
                 # print(line_new)
                 line = line_new
                 tbx_table_body += 'TB' + m.group(1) + ' & ' +\
-                                  m.group(2) + ' & \pageref{' + \
+                                  m.group(2) + r' & \\pageref{' + \
                     tbx_num_label + '}  \\\\ \n \\hline \n'
                 tbx_num += 1
                 m = re.search(re_tbx, line)
