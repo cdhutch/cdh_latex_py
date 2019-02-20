@@ -150,7 +150,7 @@ class TeX(object):
                 # print(line_new)
                 line = line_new
                 tbx_table_body += 'TB' + m.group(1) + ' & ' +\
-                                  m.group(2) + r' & \\pageref{' + \
+                                  m.group(2) + r' & \pageref{' + \
                     tbx_num_label + '}  \\\\ \n \\hline \n'
                 tbx_num += 1
                 m = re.search(re_tbx, line)
