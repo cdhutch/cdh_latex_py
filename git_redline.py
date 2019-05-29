@@ -217,9 +217,9 @@ class Repo(object):
         #     str_cmd += self.redline_prefs.repo_subdir
 
     def generate_expanded_tex(self, doc_flavor):
-        os.chdir(os.path.join(self.repo_path, self.redline_prefs.repo_subdir))
+        os.chdir(os.path.join(self.repo_path, self.redline_prefs.repo_top, self.redline_prefs.repo_subdir))
         md_full_path = os.path.join(
-            self.repo_path, self.redline_prefs.repo_subdir,
+            self.repo_path, self.redline_prefs.repo_top, self.redline_prefs.repo_subdir,
             self.redline_prefs.fname_md).strip()
         tex_full_path = os.path.splitext(
             md_full_path)[0] + doc_flavor + '.tex'
