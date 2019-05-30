@@ -8,6 +8,7 @@ import re
 from ast import literal_eval
 
 
+
 class Prefs(object):
 
     def __init__(self, path_to_redline_prefs):
@@ -215,6 +216,7 @@ class Repo(object):
         #     os.chdir(os.path.join(self.repo_path,
         #                           self.redline_prefs.repo_subdir))
         #     str_cmd += self.redline_prefs.repo_subdir
+        # clone_path = self.redline_prefs.repo_top + self.redline_pref
 
     def generate_expanded_tex(self, doc_flavor):
         os.chdir(os.path.join(self.repo_path, self.redline_prefs.repo_top, self.redline_prefs.repo_subdir))
@@ -223,13 +225,17 @@ class Repo(object):
             self.redline_prefs.fname_md).strip()
         tex_full_path = os.path.splitext(
             md_full_path)[0] + doc_flavor + '.tex'
+        subprocess.run(['ln', '-s', '/Users/cdhutchi/Documents/GitHub/LaRC_py_Documents/compile_req_doc_pkg/compile_req_doc.py', 'compile_req_doc.py'])
         print(os.getcwd())
         build_cmd = ['python', self.redline_prefs.build_py]
         build_cmd = list(filter(None, build_cmd))
         print('----')
         print(build_cmd)
         print('----')
-        subprocess.run(build_cmd)
+        try:
+            subprocess.run(build_cmd)
+        except subprocess.CalledProcessError as e:
+            print(e.output)
         build_cmd = ['python', 'expand_tex.py', tex_full_path]
         print(build_cmd)
         self.expanded_path = expand_tex.main([None, tex_full_path])
