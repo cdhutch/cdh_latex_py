@@ -234,6 +234,15 @@ class Repo(object):
         print(build_cmd)
         self.expanded_path = expand_tex.main([None, tex_full_path])
 
+    def test_repo_properties(self):
+        print('Repo flag ' + self.flag)
+        # print('Repo path: ' + self.redline_prefs.repo_path)
+        print('Repo top path: ' + self.redline_prefs.repo_top)
+        print('Repo subdir path ' + self.redline_prefs.repo_subdir)
+        print('Repo build commnad ' + self.redline_prefs.build_py)
+        print()
+
+
 
 def run_diff(diff_repo_from, diff_repo_to, doc_flavor, preserve_diff=True):
     latex_diff.main([None, diff_repo_from.expanded_path,
@@ -333,10 +342,12 @@ if __name__ == '__main__':
     shutil.rmtree(
         redline_prefs.path_to_temporary_directory, ignore_errors=True)
     repo_from = Repo(redline_prefs, hash_from, 'from')
+    # repo_from.test_repo_properties()
     repo_from.clone()
     os.chdir(home_dir)
     redline_prefs, hash_from, hash_to = parse_command_line(sys.argv)
     repo_to = Repo(redline_prefs, hash_to, 'to')
+    # repo_to.test_repo_properties()
     repo_to.clone()
     for flavor in redline_prefs.l_flavors:
         repo_from.generate_expanded_tex(flavor)
