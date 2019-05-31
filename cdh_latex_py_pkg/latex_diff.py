@@ -1,13 +1,15 @@
-''' Takes paths to two LaTeX files, expands them as necessary, computes diff, then compiles
+""" Takes paths to two LaTeX files, expands them as necessary,
+computes diff, then compiles
 
-    Syntax: latex_diff.py <path_to_old_file> <path_to_new_file> <path_to_temporary_directory>
+    Syntax: latex_diff.py
+        <path_to_old_file> <path_to_new_file> <path_to_temporary_directory>
     Result is diff.pdf file in <path_to_temporary_directory>
-'''
+"""
 
 
+from cdh_latex_py_pkg import expand_tex
 import sys
 import os
-import expand_tex
 import shutil
 import subprocess
 
@@ -38,7 +40,7 @@ def populate_temp_dir(old_path, new_path, temp_path, preserve_diff):
     return l_expand_tex
 
 
-def run_latexdiff(l_expand_tex, temp_path, hash_from, hash_to, flavor):
+def run_latexdiff(l_expand_tex, temp_path, hash_from, hash_to):
     hashtext = '_' + hash_from + '-' + hash_to
     if hashtext == '_-':
         hashtext = ''
@@ -48,7 +50,7 @@ def run_latexdiff(l_expand_tex, temp_path, hash_from, hash_to, flavor):
     cmd += ' '
     cmd += os.path.join(temp_path, l_expand_tex[1])
     cmd += ' > '
-    diff_tex = os.path.join(temp_path, (fname_diff))
+    diff_tex = os.path.join(temp_path, fname_diff)
     cmd += diff_tex
     p = subprocess.Popen(cmd, shell=True)
     os.waitpid(p.pid, 0)
@@ -62,14 +64,15 @@ def compile_diff(diff_tex):
             ['xelatex', '-interaction=batchmode', diff_tex])
 
 
-def main(argv, hash_from='', hash_to='', flavor='', preserve_diff=False):
+def main(argv, hash_from='', hash_to='', preserve_diff=False):
     # get filesnames of old and new file
     old_path, new_path, temp_path = get_filepaths(argv)
     # expands tex files to temporary directory
-    l_expand_tex = populate_temp_dir(old_path, new_path, temp_path, preserve_diff)
+    l_expand_tex = populate_temp_dir(
+        old_path, new_path, temp_path, preserve_diff)
     # run latexdiff
     diff_tex = run_latexdiff(
-        l_expand_tex, temp_path, hash_from, hash_to, flavor)
+        l_expand_tex, temp_path, hash_from, hash_to)
     # compile results
     compile_diff(diff_tex)
     print('Run complete')
@@ -77,12 +80,3 @@ def main(argv, hash_from='', hash_to='', flavor='', preserve_diff=False):
 
 if __name__ == '__main__':
     main(sys.argv)
-    # # get filesnames of old and new file
-    # old_path, new_path, temp_path = get_filepaths(sys.argv)
-    # # expands tex files to temporary directory
-    # l_expand_tex = populate_temp_dir(old_path, new_path, temp_path)
-    # # run latexdiff
-    # diff_tex = run_latexdiff(l_expand_tex, temp_path)
-    # # compile results
-    # compile_diff(diff_tex)
-    # print('Run complete')

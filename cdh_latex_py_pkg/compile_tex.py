@@ -9,13 +9,14 @@
         - temp_folder: temporary folder to use;
             defaults to ~/Documents/temporary/latex
         - compile_total: number of times to compile TeX code
-        - in_fix: future feature
+        - in_fix: enables adding text within filenames
 
-    - compile_md(): compiles MD to TeX
-    - compile_xetex(): compilex TeX to PDF using XeLaTeX
     - prep_temp_directory(): creates clean temporary directory;
         deletes any old copy
-
+    - apple_sed(): runs sed command against file using external
+        file with sed script
+    - compile_md(): compiles MD to TeX
+    - compile_xetex(): compiles TeX to PDF using XeLaTeX
 """
 import shutil
 import subprocess
@@ -49,17 +50,18 @@ class TeX(object):
         self.fname_pdf = root + in_fix + '.pdf'
         self.compile_total = compile_total
         self.in_fix = in_fix
+        self.tbx_table_body = ''
+        self.md_full_path = ''
+        self.tex_full_path = ''
 
-    def write_mmd_header(self, f, title, mmd_template='article'):
+    @staticmethod
+    def write_mmd_header(f, title, mmd_template='article'):
         f.write('latex config: {:s}\n'.format(mmd_template))
-        # f.write('latex leader:       mmd6-article-leader\n')
         f.write('Author:             Craig Hutchinson\n')
         f.write('Title:              ' + title + '  \n')
         f.write('Date:    ' +
                 datetime.datetime.now().strftime('%d %B %Y') + '  \n')
         f.write('Base Header Level:  2  \n')
-        # f.write('latex begin:        mmd6-article-begin  \n')
-        # f.write('latex footer:       mmd6-article-footer\n\n')
 
     def apply_sed(self, sed_file=None):
         tex_full_path = os.path.join(self.cwd, self.fname_tex)
@@ -74,7 +76,6 @@ class TeX(object):
                         '-o', self.tex_full_path, self.md_full_path])
 
     def compile_xetex(self):
-
         self.tex_full_path = os.path.join(self.cwd, self.fname_tex)
         for i in range(self.compile_total):
             subprocess.run(
@@ -113,7 +114,6 @@ class TeX(object):
         next_line_table_header = False
         tbx_num = 1
         tbx_table_body = ''
-        prev_line = ''
         for line in f_read:
             # Bold face first line of table
             if next_line_table_header is True:
@@ -145,7 +145,8 @@ class TeX(object):
                 if mm is not None:
                     tbx_label = r'\\label{' + tbx_num_label + '}'
                 else:
-                    tbx_label = 'TB' + m.group(1) + r'\\label{' + tbx_num_label + '}'
+                    tbx_label = 'TB' + m.group(1) +\
+                        r'\\label{' + tbx_num_label + '}'
                 line_new = re.sub(re_tbx, tbx_label, line)
                 # print(line_new)
                 line = line_new
@@ -160,7 +161,9 @@ class TeX(object):
                 for glossary in l_glossary:
                     if glossary in line:
                         print('I found ' + glossary)
-                        line = line.split(glossary)[0] + r'\gls{' + glossary + '}' + line.split(glossary)[1]
+                        line = line.split(glossary)[
+                            0] + r'\gls{' + glossary + '}' +\
+                            line.split(glossary)[1]
                         l_glossary.remove(glossary)
                         print(line)
             else:
@@ -168,9 +171,9 @@ class TeX(object):
                 l_glossary += [m.group(1)]
                 print(l_glossary)
             f_write.write(line)
-            # print(line)
-            prev_line = line
             m = None
+            if m is None:
+                pass
         print('Writing out: ' + self.tex_full_path)
         print(l_glossary)
         f_write.close()
@@ -188,7 +191,12 @@ class TeX(object):
             \begin{minipage}{\linewidth}
             \setlength{\tymax}{0.5\linewidth}
             \centering
-            \small\begin{tabular}{| >{\centering\arraybackslash}m{1.25in}| >{\centering\arraybackslash}m{2.95in}| >{\centering\arraybackslash}m{1.5in}|} \hline
+            \small
+            \begin{tabular}
+            {| >{\centering\arraybackslash}m{1.25in}|
+            >{\centering\arraybackslash}m{2.95in}|
+            >{\centering\arraybackslash}m{1.5in}|}
+            \hline
             \bfseries{Item} & \bfseries{Description} & \bfseries{Page}\\
             \hline
             '''
@@ -213,9 +221,9 @@ def main():
 
 
 def test_code():
-    tex_file = TeX(
-        '~/Documents/GitHub/cdh_latex_py/test_files/A2A C172 Checklist_mmd6.txt'
-    )
+    md_fname = '~/Documents/GitHub/cdh_latex_py'
+    md_fname += '/test_files/A2A C172 Checklist_mmd6.txt'
+    tex_file = TeX(md_fname)
     tex_file.prep_temp_directory()
     tex_file.compile_md()
     tex_file.apply_sed()

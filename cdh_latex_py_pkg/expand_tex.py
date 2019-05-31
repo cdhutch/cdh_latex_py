@@ -1,4 +1,4 @@
-"""Parses and .tex file for \input{} commands and expands into new document
+"""Parses and .tex file for \\input{} commands and expands into new document
 
 Command Line Arguments:
     1. path_to_texfile: file to expand (required)
@@ -60,10 +60,12 @@ def expand(argv):
     f_write.close()
     shutil.copyfile(path_to_texfile + '_expanded.tex',
                     path_to_texfile + '_expanded_backup.tex')
-    return (path_to_texfile + '_expanded.tex')
+    return path_to_texfile + '_expanded.tex'
+
 
 def main(argv):
     return expand(argv)
+
 
 if __name__ == '__main__':
     main(sys.argv)

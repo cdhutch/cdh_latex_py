@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="cdh_latex_py_pkg-cdhutch",
-    version="0.0.2",
+    version="0.0.3",
     author="Craig Hutchinson",
     author_email="author@example.com",
     description="A small example package",

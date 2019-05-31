@@ -1,11 +1,11 @@
+from cdh_latex_py_pkg import expand_tex
+from cdh_latex_py_pkg import latex_diff
+from ast import literal_eval
 import subprocess
 import sys
 import os
 import shutil
-import expand_tex
-import latex_diff
 import re
-from ast import literal_eval
 
 
 class Prefs(object):
@@ -17,7 +17,6 @@ class Prefs(object):
         self.build_from_py = None
         self.build_to_py = None
         self.fname_md = None
-        self.fname_csv = None
         self.l_flavors = ['']
         self.branch = None
         self.repo_top = None
@@ -54,11 +53,6 @@ class Prefs(object):
             pattern_split = pattern.split(line)
             if len(pattern_split) > 1:
                 self.fname_md = pattern.split(line)[1].strip()
-                continue
-            pattern = re.compile(r'fname_csv:\s', re.IGNORECASE)
-            pattern_split = pattern.split(line)
-            if len(pattern_split) > 1:
-                self.fname_csv = pattern.split(line)[1].strip()
                 continue
             pattern = re.compile(r'l_flavors:\s', re.IGNORECASE)
             pattern_split = pattern.split(line)
@@ -114,12 +108,12 @@ class Prefs(object):
         if self.build_py is None:
             if self.build_from_py is None:
                 raise ValueError(
-                    'Need a either subdir or both build_from.py' +
+                    'Need a either build_py or both build_from.py' +
                     ' and build_to.py values in ' + path_to_redline_prefs)
         if self.repo_top is None:
             if self.repo_from_top is None:
                 raise ValueError(
-                    'Need a either subdir or both repo_from_top' +
+                    'Need a either repo_top or both repo_from_top' +
                     ' and repo_to_top values in ' + path_to_redline_prefs)
 
 
@@ -221,76 +215,7 @@ def run_diff(diff_repo_from, diff_repo_to, doc_flavor, preserve_diff=True):
                      diff_repo_to.expanded_path,
                      (diff_repo_from.diff_path + doc_flavor)],
                     hash_from=diff_repo_from.hash, hash_to=diff_repo_to.hash,
-                    flavor=flavor, preserve_diff=preserve_diff)
-
-
-def parse_prefs_file(path_to_redline_prefs):
-    f = open(path_to_redline_prefs)
-    url = None
-    subdir = None
-    build_py = None
-    fname_md = None
-    fname_csv = None
-    l_flavors = ['']
-    branch = None
-    repo_top = None
-    repo_subdir = None
-    for line in f:
-        pattern = re.compile(r'^URL:\s', re.IGNORECASE)
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            url = pattern.split(line)[1].strip()
-            continue
-        pattern = re.compile(r'^Subdir:\s', re.IGNORECASE)
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            subdir = pattern.split(line)[1].strip()
-            continue
-        pattern = re.compile(r'build_py:\s', re.IGNORECASE)
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            build_py = pattern.split(line)[1].strip()
-            continue
-        pattern = re.compile(r'fname_md:\s', re.IGNORECASE)
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            fname_md = pattern.split(line)[1].strip()
-            continue
-        pattern = re.compile(r'fname_csv:\s', re.IGNORECASE)
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            fname_csv = pattern.split(line)[1].strip()
-            continue
-        pattern = re.compile(r'l_flavors:\s', re.IGNORECASE)
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            l_flavors = literal_eval(pattern.split(line)[1])
-            continue
-        pattern = re.compile(r'branch:\s')
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            branch = pattern.split(line)[1].strip()
-            continue
-        pattern = re.compile(r'repo_top:\s')
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            repo_top = pattern.split(line)[1].strip()
-            continue
-        pattern = re.compile(r'repo_subdir:\s')
-        pattern_split = pattern.split(line)
-        if len(pattern_split) > 1:
-            repo_subdir = pattern.split(line)[1].strip()
-            continue
-
-    f.close()
-    if url is None:
-        raise ValueError('Need a url field in ' + path_to_redline_prefs)
-    if (subdir is None) & (repo_top is None):
-        raise ValueError('Need a subdir field in ' + path_to_redline_prefs)
-    if build_py is None:
-        raise ValueError('Need a build_py field in ' + path_to_redline_prefs)
-    return (url, subdir, build_py, fname_md, fname_csv, l_flavors,
-            repo_top, repo_subdir, branch)
+                    preserve_diff=preserve_diff)
 
 
 def parse_command_line(argv):
