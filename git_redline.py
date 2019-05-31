@@ -26,7 +26,7 @@ class Prefs(object):
         self.repo_to_top = None
         self.repo_subdir = None
         self.repo_from_subdir = None
-        self.to_subdir = None
+        self.repo_to_subdir = None
         self.path_to_temporary_directory = os.path.expanduser(
             '~/Documents/temporary')
 
@@ -226,6 +226,7 @@ class Repo(object):
         tex_full_path = os.path.splitext(
             md_full_path)[0] + doc_flavor + '.tex'
         subprocess.run(['ln', '-s', '/Users/cdhutchi/Documents/GitHub/LaRC_py_Documents/compile_req_doc_pkg/compile_req_doc.py', 'compile_req_doc.py'])
+        subprocess.run(['ln', '-s', '/Users/cdhutchi/Documents/GitHub/cdh_latex_py/cdh_latex_py_pkg/compile_tex.py', 'compile_tex.py'])
         print(os.getcwd())
         build_cmd = ['python', self.redline_prefs.build_py]
         build_cmd = list(filter(None, build_cmd))
