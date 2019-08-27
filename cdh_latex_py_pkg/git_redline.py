@@ -141,10 +141,10 @@ class Repo(object):
                 self.redline_prefs.build_py = repo_redline_prefs.build_to_py
         self.hash = repo_hash
         self.diff_path = os.path.join(
-            redline_prefs.path_to_temporary_directory, 'git_redline',
+            self.redline_prefs.path_to_temporary_directory, 'git_redline',
             'diff_results')
         self.repo_path = os.path.join(
-            redline_prefs.path_to_temporary_directory, 'git_redline',
+            self.redline_prefs.path_to_temporary_directory, 'git_redline',
             (flag + '_' + repo_hash)).strip()
         self.flag = flag
         self.expanded_path = None

@@ -29,7 +29,7 @@ import datetime
 class TeX(object):
     def __init__(
             self, md_full_path=None, temp_folder=None,
-            compile_total=3, in_fix=''):
+            compile_total=3, in_fix='', debug=False):
         if md_full_path is None:
             if len(sys.argv) > 1:
                 md_full_path = sys.argv[1]
@@ -53,6 +53,7 @@ class TeX(object):
         self.tbx_table_body = ''
         self.md_full_path = ''
         self.tex_full_path = ''
+        self.debug = debug
 
     @staticmethod
     def write_mmd_header(f, title, mmd_template='article'):
@@ -90,15 +91,16 @@ class TeX(object):
                 shutil.move(os.path.join(self.cwd, fname_aux),
                             os.path.join(self.temp_folder, fname_aux))
             except FileNotFoundError:
-                print(fname_aux)
+                if self.debug:
+                    print(fname_aux)
                 pass
 
     def prep_temp_directory(self):
         shutil.rmtree(self.temp_folder, ignore_errors=True)
         os.makedirs(self.temp_folder, exist_ok=True)
 
-    def pass1(self, thicklines=False):
-        re_tbx = re.compile(r'\\Q?TB([RD])\{([^\}]*)\}')
+    def pass1(self):
+        re_tbx = re.compile(r'\\Q?TB([RD]){([^\}]*)\}')
         re_qtbx = re.compile(r'\\QTB[RD]')
         re_glossary = re.compile(
             r'\\longnewglossaryentry{(\w+([-\s]+\w+)+)}')
@@ -108,8 +110,8 @@ class TeX(object):
         print('Reading in: ' + fpath_fname_old)
         f_read = open(fpath_fname_old, 'r')
         f_write = open(self.tex_full_path, 'w')
-        re_tabulary = re.compile(r'\\begin\{tabulary\}\{(\S*)\}\{(\S*)\}')
-        re_tablewidth = re.compile(r'\\tablewidth\{([\S]*)\}')
+        re_tabulary = re.compile(r'\\begin{tabulary\}{(\S*)\}{(\S*)\}')
+        re_tablewidth = re.compile(r'\\tablewidth{([\S]*)\}')
         column_format = None
         next_line_table_header = False
         tbx_num = 1
@@ -160,22 +162,27 @@ class TeX(object):
             if m is None:
                 for glossary in l_glossary:
                     if glossary in line:
-                        print('I found ' + glossary)
+                        if self.debug:
+                            print('I found ' + glossary)
                         line = line.split(glossary)[
                             0] + r'\gls{' + glossary + '}' +\
                             line.split(glossary)[1]
                         l_glossary.remove(glossary)
-                        print(line)
+                        if self.debug:
+                            print(line)
             else:
-                print('I added ' + m.group(1))
+                if self.debug:
+                    print('I added ' + m.group(1))
                 l_glossary += [m.group(1)]
-                print(l_glossary)
+                if self.debug:
+                    print(l_glossary)
             f_write.write(line)
             m = None
             if m is None:
                 pass
         print('Writing out: ' + self.tex_full_path)
-        print(l_glossary)
+        if self.debug:
+            print(l_glossary)
         f_write.close()
         return tbx_table_body
 
