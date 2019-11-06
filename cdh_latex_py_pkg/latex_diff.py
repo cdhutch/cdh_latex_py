@@ -75,6 +75,10 @@ def main(argv, hash_from='', hash_to='', preserve_diff=False):
         l_expand_tex, temp_path, hash_from, hash_to)
     # compile results
     compile_diff(diff_tex)
+    diff_pdf = diff_tex[:-4] + '.pdf'
+    print(diff_pdf)
+    # subprocess.run(['osascript', '-e', '\'quit app \"Preview\"\''])
+    subprocess.run(['open', diff_pdf])
     print('Run complete')
 
 
